@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Training</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="images/CrisisCrew.png" type="image/x-icon">
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css"
@@ -27,7 +29,7 @@
           </a>
           <div class="list-group mt-3">
             <a href="client_dashboard.html">Dashboard</a>
-            <a href="portfolio.html">Portfolio</a>
+            <a href="My Profile.html">My Profile</a>
             <a href="#training-modules">Training Module</a>
             <a href="blogs.html">Blogs</a>
             <a href="coming_soon.html">Community Forum</a>

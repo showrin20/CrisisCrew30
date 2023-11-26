@@ -6,6 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/CrisisCrew.png" type="image/x-icon">
 
     <title>Crisis Responders Dashboard</title>
     <link rel="stylesheet" href="css/style.css" />
@@ -37,7 +38,7 @@
           </a>
           <div class="list-group mt-3">
             <a href="client_dashboard.php">Dashboard</a>
-            <a href="portfolio.php">Portfolio</a>
+            <a href="My Profile.php">My Profile</a>  
             <a href="training.php">Training Module</a>
             <a href="blogs.php">Blogs</a>
             <a href="coming_soon.php">Community Forum</a>
@@ -45,7 +46,7 @@
 
           <!-- Logout Link -->
           <footer class="mt-3">
-            <a href="index.html">Logout</a>
+            <a href="index.php">Logout</a>
           </footer>
         </nav>
 

@@ -22,7 +22,7 @@ $skills = ["Fire Suppression Techniques", "Emergency Evacuation Planning"];
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css"/>
 
-    <!-- Custom CSS -->
+    <link rel="icon" href="images/CrisisCrew.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css"/>
 
     <!-- Additional Styles -->
@@ -49,14 +49,14 @@ $skills = ["Fire Suppression Techniques", "Emergency Evacuation Planning"];
       <div class="row">
         <!-- Sidebar -->
         <nav class="col-12 col-md-3 col-lg-2 sidebar">
-          <a href="index.html">
+          <a href="index.php">
             <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
           </a>
 
           <!-- Sidebar Navigation Links -->
           <div class="list-group mt-3">
           <a href="client_dashboard.php">Dashboard</a>
-            <a href="portfolio.php">Portfolio</a>
+            <a href="My Profile.php">My Profile</a>
             <a href="training.php">Training Module</a>
             <a href="blogs.php">Blogs</a>
             <a href="coming_soon.php">Community Forum</a>

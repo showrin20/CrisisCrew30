@@ -141,3 +141,4 @@ VALUES
 ('Jane', 'Doe', 'jane@example.com', '9876543210', '456 Oak St', 'Townsville', 'Female', 'A-', '1992-03-15', 'CPR, Disaster Management', 'images/janedoe.jpg', 'jane_doe', '1234');
 
 COMMIT;
+

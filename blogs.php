@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crisis Hero Blogs</title>
+    <link rel="icon" href="images/CrisisCrew.png" type="image/x-icon">
+
     <link rel="stylesheet" href="css/style.css" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" />
@@ -38,7 +40,7 @@
                 </a>
                 <div class="list-group mt-3">
                     <a href="client_dashboard.php">Dashboard</a>
-                    <a href="portfolio.php">Portfolio</a>
+                    <a href="My Profile.php">My Profile</a>
                     <a href="training.php">Training Module</a>
                     <a href="blogs.php">Blogs</a>
                     <a href="coming_soon.php">Community Forum</a>

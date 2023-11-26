@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CrisisCrew</title>
     <link rel="stylesheet" href="css\style.css" />
+    <link rel="icon" href="images/CrisisCrew.png" type="image/x-icon">
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -249,6 +251,8 @@
         <div class="col-md-6 col-lg-6 col-12 mt-4 mt-md-0">
           <div class="form-container">
             <h3>Contact Us</h3>
+
+
             <form action="/submit_contact_form" method="POST">
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" placeholder="Your Name" required style="margin-bottom: 15px;">
@@ -261,7 +265,18 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
+
+            
         </div>
+
+
+
+
+
+
+
+
         </div>
         <div class="col-md-6 col-lg-6 col-12 mt-4 mt-md-0">
           <!-- Content above the footer -->
