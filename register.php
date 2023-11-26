@@ -124,7 +124,8 @@
 
             <h5>Personal Information</h5>
 
-            <form method="POST" action="process_form.php">
+     <form method="POST" action="process_form.php" enctype="multipart/form-data">
+>
               <div class="form-row">
                 <!-- First Row -->
                 <div class="form-group col-md-6">

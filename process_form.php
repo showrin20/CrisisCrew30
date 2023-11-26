@@ -1,7 +1,19 @@
 <?php
+session_start();
 
-// Assuming you have a database connection in 'dbh.php'
-require_once('dbh.php');
+// Replace these with your actual database credentials
+$servername = "localhost";
+$username = "sowadrahman";
+$password = "kikhobor";
+$dbname = "crisiscrew20";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 // Fetching form data
 $firstName = $_POST['firstName'];
@@ -26,7 +38,7 @@ if (in_array($filecheck, $fileextstored)) {
     $destinationfile = 'images/' . $filename;
     move_uploaded_file($filetemp, $destinationfile);
 } else {
-    $destinationfile = 'images/no.jpg'; // Default image if file type is not allowed
+    $destinationfile = 'images/ceo.jpg'; // Default image if file type is not allowed
 }
 
 // Checkbox skills handling
@@ -41,7 +53,7 @@ $result = mysqli_query($conn, $sql);
 if ($result) {
     echo ("<SCRIPT LANGUAGE='JavaScript'>
     window.alert('Successfully Registered as a Volunteer')
-    window.location.href='your_success_page.php';
+    window.location.href='client_login.php'; // Redirect to the client login page
     </SCRIPT>");
 } else {
     echo ("<SCRIPT LANGUAGE='JavaScript'>
@@ -49,5 +61,4 @@ if ($result) {
     window.location.href='javascript:history.go(-1)';
     </SCRIPT>");
 }
-
 ?>
