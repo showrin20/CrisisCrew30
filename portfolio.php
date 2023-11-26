@@ -1,296 +1,74 @@
+<?php
+// Sample user data (replace this with actual data fetched from a database)
+$firstName = "John";
+$lastName = "Smith";
+$email = "john.smith@example.com";
+$contact = "+1234567890";
+$address = "123 Main Street, Cityville";
+$location = "City";
+$gender = "Male";
+$bloodGroup = "O+";
+$DOB = "1990-01-01";
+$skills = ["Fire Suppression Techniques", "Emergency Evacuation Planning"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <!-- Additional Styles -->
     <style>
-    
-
-      .portfolio-table {
-        margin-top: 30px;
-      }
-
-      .table-info th,
-      .table-info td {
-        background-color: #bee0f8;
-        border: 1px solid black;
-      }
-
-      .table-green th,
-      .table-green td {
-        background-color: #c1e6c6;
-        border: 1px solid black;
-      }
-
-      .table-orange th,
-      .table-orange td {
-        background-color: #ffd8b2;
-        border: 1px solid black;
-      }
-
-      .table-purple th,
-      .table-purple td {
-        background-color: #dbc6eb;
-        border: 1px solid black;
-      }
+        /* Add your custom styles here */
     </style>
-  </head>
-
-  <body >
+</head>
+<body>
     <div class="container-fluid">
-      <div class="row">
-        <!-- Sidebar -->
-        <nav class="col-12 col-md-3 col-lg-2 sidebar">
-            <a href="index.html">
-              <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
-            </a>
-            <div class="list-group mt-3">
-              <a href="client_dashboard.html">Dashboard</a>
-              <a href="portfolio.html">Portfolio</a>
-              <a href="training.html">Training Module</a>
-              <a href="blogs.html">Blogs</a>
-              <a href="coming_soon.html">Community Forum</a>
-            </div>
-      
-            <!-- Logout Link -->
-            <footer class="mt-3">
-              <a href="index.html">Logout</a>
-            </footer>
-          </nav>
+        <div class="profile-container">
+            <h4>Welcome, <?php echo $firstName . ' ' . $lastName; ?>!</h4>
+            <p>You have administrative privileges to manage Crisis Crew activities.</p>
 
-        <div class="col-lg-10 col-md-9 col-12">
-          <div class="welcome-message">
-            <h4>Welcome, John Smith!</h4>
-            <p style="color: #676a6a">
-              Explore My Work and Engagement
-            </p>
+            <!-- Display user information (you may dynamically fetch this from a database) -->
+            <h5>Personal Information</h5>
+            <p><strong>First Name:</strong> <?php echo $firstName ?? ''; ?></p>
+            <p><strong>Last Name:</strong> <?php echo $lastName ?? ''; ?></p>
+            <p><strong>Email:</strong> <?php echo $email ?? ''; ?></p>
+            <p><strong>Contact:</strong> <?php echo $contact ?? ''; ?></p>
+            <p><strong>Address:</strong> <?php echo $address ?? ''; ?></p>
+            <p><strong>Location:</strong> <?php echo $location ?? ''; ?></p>
+            <p><strong>Gender:</strong> <?php echo $gender ?? ''; ?></p>
+            <p><strong>Blood Group:</strong> <?php echo $bloodGroup ?? ''; ?></p>
+            <p><strong>Date of Birth:</strong> <?php echo $DOB ?? ''; ?></p>
 
+            <!-- Additional user information -->
+            <h5>Skills</h5>
+            <ul>
+                <?php
+                    if (isset($skills) && is_array($skills)) {
+                        foreach ($skills as $skill) {
+                            echo "<li>$skill</li>";
+                        }
+                    }
+                ?>
+            </ul>
 
-          <div class="row">
-            <!-- Completed Training Modules -->
-            <div class="col-md-6">
-              <h5 class="mt-4">Completed Training Modules</h5>
-              <div class="table-responsive table-info">
-                <table class="table portfolio-table" id="training-modules-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Module Name</th>
-                      <th scope="col">Completion Date</th>
-                      <!-- <th scope="col">Instructor</th> -->
-                      <th scope="col">Action</th>
+            <!-- Add more sections for completed training modules, crisis responses, achievements, and skills if needed -->
 
-                    </tr>
-                    
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Dummy Module 1</td>
-                      <td>2023-10-25</td>
-                      <!-- <td>John Doe</td> -->
-                      <td>
-                        <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                        <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button> </td>
-                </tr>
-                       
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Dummy Module 2</td>
-                      <td>2023-10-25</td>
-                      <!-- <td>Jane Smith</td> -->
-                      <td>
-                        <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                        <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                      </tr>
-                       
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Dummy Module 3</td>
-                      <td>2023-10-25</td>
-                      <!-- <td>Michael Johnson</td> -->
-                      <td>
-                        <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                        <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                      </tr>
-                       
-                      </td>
-                    </tr>
-                    <!-- Add more dummy rows as needed -->
-                  </tbody>
-                  
-                </table>
-                <td>
-                  <button class="btn btn-primary" style="width: 80px;"><a href="form1.html" style="text-decoration: none; color:aliceblue;">Add</a></button>
-                   
-                  </td>
-              
-               
-
-
-              </div>
-            </div>
-
-            <!-- Crisis Responses -->
-            <div class="col-md-6">
-              <h5 class="mt-4">Crisis Responses</h5>
-              <div class="table-responsive table-green">
-                <table class="table portfolio-table" id="training-modules-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Incident</th>
-                      <th scope="col">Location</th>
-                      <!-- <th scope="col">Date</th> -->
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Dummy Incident 1</td>
-                      <td>City Park</td>
-                      <!-- <td>2023-10-25</td> -->
-                        <td>
-                            <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                            <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                          </tr>
-                    </tr>
-                    <tr>
-                      <td>Dummy Incident 2</td>
-                      <td>Residential Area</td>
-                      <!-- <td>2023-10-25</td> -->
-                      <td>
-                        <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                        <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                      </tr>
-                       
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Dummy Incident 3</td>
-                      <td>Downtown</td>
-                      <!-- <td>2023-10-25</td> -->
-                        <td>
-                            <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                            <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                          </tr>
-                    </tr>
-                    <!-- Add more dummy rows as needed -->
-                  </tbody>
-                </table>
-                <td>
-                  <button class="btn btn-primary" style="width: 80px;"><a href="form1.html" style="text-decoration: none; color:aliceblue;">Add</a></button>
-                   
-                  </td>
-
-                
-              </div>
-            </div>
-          </div>
-
-          <div class="row mt-4">
-            <!-- Achievements -->
-            <div class="col-md-6">
-              <h5>Achievements</h5>
-              <div class="table-responsive table-orange">
-                <table class="table portfolio-table" id="training-modules-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Achievement</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Dummy Achievement 1</td>
-                      <td>2023-10-25</td>
-                      <td>
-                        <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                        <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                      </tr>
-                    </tr>
-                    <tr>
-                      <td>Dummy Achievement 2</td>
-                      <td>2023-10-25</td>
-                        <td>
-                            <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                            <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                          </tr>
-                    </tr>
-                    <tr>
-                      <td>Dummy Achievement 3</td>
-                      <td>2023-10-25</td>
-                        <td>
-                            <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                            <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                          </tr>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <td>
-                             <button class="btn btn-primary" style="width: 80px;"><a href="form1.html" style="text-decoration: none; color:aliceblue;">Add</a></button>
-                   
-                  </td>
-              </div>
-            </div>
-
-            <!-- Skills -->
-            <div class="col-md-6">
-              <h5>Skills</h5>
-              <div class="table-responsive table-purple">
-                <table class="table portfolio-table" id="training-modules-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Skill</th>
-                      <th scope="col">Proficiency Level</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Dummy Skill 1</td>
-                      <td>Intermediate</td>
-                      <td>
-                        <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                        <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                      </tr>
-                    </tr>
-                    <tr>
-                      <td>Dummy Skill 2</td>
-                      <td>Advanced</td>
-                        <td>
-                            <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                            <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button></td>
-                    </tr>
-                    <tr>
-                      <td>Dummy Skill 3</td>
-                      <td>Intermediate</td>
-                        <td>
-                            <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Update</button>
-                            <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button> </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <td>
-                             <button class="btn btn-primary" style="width: 80px;"><a href="form1.html" style="text-decoration: none; color:aliceblue;">Add</a></button>
-                   
-                  </td>
-              </div>
-            </div>
-          </div>
+            <a href="edit_profile.html" class="btn btn-primary">Edit Profile</a>
         </div>
-      </div>
     </div>
 
-    
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
 </html>

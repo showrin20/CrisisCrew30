@@ -25,6 +25,8 @@ $location = $_POST['location'];
 $gender = $_POST['gender'];
 $bloodGroup = $_POST['bloodGroup'];
 $achievements = $_POST['DOB'];
+$username = $_POST['username']; // Add username
+$password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash and add password
 
 // File handling
 $files = $_FILES['file'];
@@ -45,20 +47,20 @@ if (in_array($filecheck, $fileextstored)) {
 $skills = isset($_POST['skills']) ? implode(', ', $_POST['skills']) : '';
 
 // Inserting data into the 'volunteers' table
-$sql = "INSERT INTO `volunteers`(`id`, `firstName`, `lastName`, `email`, `contact`, `address`, `location`, `gender`, `bloodGroup`, `achievements`, `skills`, `pic`)
-        VALUES ('', '$firstName', '$lastName', '$email', '$contact', '$address', '$location', '$gender', '$bloodGroup', '$achievements', '$skills', '$destinationfile')";
+$sql = "INSERT INTO `volunteers`(`id`, `username`, `password`, `firstName`, `lastName`, `email`, `contact`, `address`, `location`, `gender`, `bloodGroup`, `achievements`, `skills`, `pic`)
+        VALUES ('', '$username', '$password', '$firstName', '$lastName', '$email', '$contact', '$address', '$location', '$gender', '$bloodGroup', '$achievements', '$skills', '$destinationfile')";
 
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
     echo ("<SCRIPT LANGUAGE='JavaScript'>
     window.alert('Successfully Registered as a Volunteer')
-    window.location.href='client_login.php'; // Redirect to the client login page
+    window.location.href='client_login.php';
     </SCRIPT>");
 } else {
     echo ("<SCRIPT LANGUAGE='JavaScript'>
     window.alert('Failed to Register as a Volunteer')
-    window.location.href='javascript:history.go(-1)';
+    window.location.href='client_login.php';
     </SCRIPT>");
 }
 ?>

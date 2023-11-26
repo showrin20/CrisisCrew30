@@ -178,6 +178,29 @@
                     required
                   />
                 </div>
+                <div class="form-group col-md-6">
+                  <label for="email" style="color: #676a6a">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    name="username"
+                    placeholder="Enter username"
+                    required
+                  />
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="password" style="color: #676a6a">Password</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Enter password"
+                    required
+                  />
+                </div>
 
                 <!-- Third Row -->
                 <div class="form-group col-md-6">

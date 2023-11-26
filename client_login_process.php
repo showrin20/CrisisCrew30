@@ -15,60 +15,28 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Process registration form
-    if (isset($_POST['register'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+    $username = $_POST["username"];
+    $password = $_POST["password"];
 
-        // Validate and sanitize input (you can add more validation)
-        $email = mysqli_real_escape_string($conn, $email);
-        $password = mysqli_real_escape_string($conn, $password);
+    // Use prepared statements to prevent SQL injection
+    $stmt = $conn->prepare("SELECT * FROM volunteers WHERE username = ? AND password = ?");
+    $stmt->bind_param("ss", $username, $password);
 
-        // Hash the password before storing it in the database
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        // Insert user data into the database
-        $sql = "INSERT INTO users (email, password) VALUES ('$email', '$hashedPassword')";
-        if ($conn->query($sql) === TRUE) {
-            echo "Registration successful!";
-            // Redirect to the login page
-            header("Location: client_login.php");
-            exit();
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+    if ($result->num_rows > 0) {
+        // Login successful
+        $_SESSION["username"] = $username;
+        header("Location: client_dashboard.php");
+    } else {
+        // Invalid credentials, redirect back to the login page
+        header("Location: client_login.php");
     }
 
-    // Process login form
-    elseif (isset($_POST['login'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        // Validate and sanitize input
-        $email = mysqli_real_escape_string($conn, $email);
-        $password = mysqli_real_escape_string($conn, $password);
-
-        // Retrieve user data from the database based on the provided email
-        $sql = "SELECT * FROM users WHERE email = '$email'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            // Verify the password
-            if (password_verify($password, $row['password'])) {
-                // Password is correct, set session variables and redirect to the success page
-                $_SESSION['user_id'] = $row['id'];
-                $_SESSION['email'] = $row['email'];
-                header("Location: client_dashboard.php");
-                exit();
-            } else {
-                echo "Invalid password!";
-            }
-        } else {
-            echo "User not found!";
-        }
-    }
+    $stmt->close();
 }
+
+$conn->close();
 ?>

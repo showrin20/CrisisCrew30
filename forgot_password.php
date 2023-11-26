@@ -1,4 +1,3 @@
-<!-- forgot_password.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +8,59 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Add your custom styles if needed -->
     <style>
-        /* Custom styles go here */
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff; /* White background for the form */
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners for the form */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow for the form */
+            margin-top: 100px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #0cc0df; /* Blue color for the heading */
+        }
+
+        .form-group {
+            width: 100%; /* Adjust as needed */
+        }
+
+        .form-label {
+            color: #495057; /* Dark gray color for form labels */
+        }
+
+        .btn-primary {
+            background-color: #0cc0df; /* Blue background color for the submit button */
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue background on hover */
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px; /* Adjust as needed */
+        }
+
+        .logo img {
+            width: 200px;
+        }
     </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Forgot Password</h2>
+        <div class="logo">
+            <img src="images/CrisisCrew.png" width="200" alt="Logo">
+        </div>
+        <h3>Forgot Password</h3>
         <form action="forgot_password_process.php" method="post">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
