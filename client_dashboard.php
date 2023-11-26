@@ -36,11 +36,11 @@
             <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
           </a>
           <div class="list-group mt-3">
-            <a href="client_dashboard.html">Dashboard</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="training.html">Training Module</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="coming_soon.html">Community Forum</a>
+            <a href="client_dashboard.php">Dashboard</a>
+            <a href="portfolio.php">Portfolio</a>
+            <a href="training.php">Training Module</a>
+            <a href="blogs.php">Blogs</a>
+            <a href="coming_soon.php">Community Forum</a>
           </div>
 
           <!-- Logout Link -->

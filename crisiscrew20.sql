@@ -137,7 +137,7 @@ CREATE TABLE `volunteers` (
 
 INSERT INTO `volunteers` (`firstName`, `lastName`, `email`, `contact`, `address`, `location`, `gender`, `bloodGroup`, `achievements`, `skills`, `pic`, `username`, `password`)
 VALUES
-('John', 'Doe', 'john@example.com', '1234567890', '123 Main St', 'Cityville', 'Male', 'O+', '1990-01-01', 'First Aid, Fire Safety', 'images/johndoe.jpg', 'john_doe', '$2y$10$UeEpZJOFus2VTQ8f7s6NluUwDvSKJrL.IRX4T9XbFXSz5p0GIE3My'),
-('Jane', 'Doe', 'jane@example.com', '9876543210', '456 Oak St', 'Townsville', 'Female', 'A-', '1992-03-15', 'CPR, Disaster Management', 'images/janedoe.jpg', 'jane_doe', '$2y$10$UeEpZJOFus2VTQ8f7s6NluUwDvSKJrL.IRX4T9XbFXSz5p0GIE3My');
+('John', 'Doe', 'john@example.com', '1234567890', '123 Main St', 'Cityville', 'Male', 'O+', '1990-01-01', 'First Aid, Fire Safety', 'images/johndoe.jpg', 'john_doe', '1234'),
+('Jane', 'Doe', 'jane@example.com', '9876543210', '456 Oak St', 'Townsville', 'Female', 'A-', '1992-03-15', 'CPR, Disaster Management', 'images/janedoe.jpg', 'jane_doe', '1234');
 
 COMMIT;

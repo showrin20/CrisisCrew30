@@ -27,14 +27,54 @@ $skills = ["Fire Suppression Techniques", "Emergency Evacuation Planning"];
 
     <!-- Additional Styles -->
     <style>
-        /* Add your custom styles here */
+          body {
+            background-color: #f8f9fa; /* Set a light background color */
+        }
+
+        .container-fluid {
+            margin-top: 20px; /* Add margin at the top for spacing */
+        }
+
+        .welcome-message {
+            background-color: #fff; /* Set a white background color for the user profile */
+            padding: 20px; /* Add padding for spacing */
+            border-radius: 8px; /* Add border radius for rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+        }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="profile-container">
-            <h4>Welcome, <?php echo $firstName . ' ' . $lastName; ?>!</h4>
-            <p>You have administrative privileges to manage Crisis Crew activities.</p>
+    
+<div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-12 col-md-3 col-lg-2 sidebar">
+          <a href="index.html">
+            <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
+          </a>
+
+          <!-- Sidebar Navigation Links -->
+          <div class="list-group mt-3">
+            <a href="admin_dashboard.html">Dashboard</a>
+            <a href="disaster_event.html">Disaster Event</a>
+            <a href="task_management.html">Task Management</a>
+            <a href="resource_management.html">Resource Management</a>
+          </div>
+
+          <!-- Logout Link -->
+          <footer class="mt-3">
+            <a href="index.html" style="color: #adb5bd">Logout</a>
+          </footer>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="col-lg-10 col-md-9 col-12">
+          <div class="welcome-message">
+            <h4 style="color: #343a40">Welcome, <?php echo $firstName ?? ''; ?></h4>
+            <p style="color: #6c757d">
+              Find Your Cause, Make a Difference - VolunteerConnect, Your
+              Gateway to Meaningful Impact.
+            </p>
 
             <!-- Display user information (you may dynamically fetch this from a database) -->
             <h5>Personal Information</h5>
@@ -49,8 +89,7 @@ $skills = ["Fire Suppression Techniques", "Emergency Evacuation Planning"];
             <p><strong>Date of Birth:</strong> <?php echo $DOB ?? ''; ?></p>
 
             <!-- Additional user information -->
-            <h5>Skills</h5>
-            <ul>
+            <p><strong>Skills:</strong>            <ul>
                 <?php
                     if (isset($skills) && is_array($skills)) {
                         foreach ($skills as $skill) {
