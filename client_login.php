@@ -9,7 +9,7 @@
     <!-- Add your custom styles if needed -->
     <style>
         body {
-            background-image: url(images/new.jpeg);background-repeat: no-repeat; background-size: cover; 
+            background-color: #f8f9fa;
             /* Light gray background */
         }
 

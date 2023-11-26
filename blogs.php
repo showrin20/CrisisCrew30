@@ -33,20 +33,20 @@
         <div class="row">
             <!-- Sidebar -->
             <nav class="col-12 col-md-3 col-lg-2 sidebar">
-                <a href="index.html">
+                <a href="index.php">
                     <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
                 </a>
                 <div class="list-group mt-3">
-                    <a href="client_dashboard.html">Dashboard</a>
-                    <a href="portfolio.html">Portfolio</a>
-                    <a href="training.html">Training Module</a>
-                    <a href="blogs.html">Blogs</a>
-                    <a href="coming_soon.html">Community Forum</a>
+                    <a href="client_dashboard.php">Dashboard</a>
+                    <a href="portfolio.php">Portfolio</a>
+                    <a href="training.php">Training Module</a>
+                    <a href="blogs.php">Blogs</a>
+                    <a href="coming_soon.php">Community Forum</a>
                 </div>
 
                 <!-- Logout Link -->
                 <footer class="mt-3">
-                    <a href="index.html">Logout</a>
+                    <a href="index.php">Logout</a>
                 </footer>
             </nav>
 
@@ -72,19 +72,19 @@
                                 'image' => 'images/flood.gif',
                                 'title' => 'Guardians of the Community',
                                 'content' => 'Firefighters are the guardians of our communities, standing tall in the face of danger. Their quick response and decisive actions during emergencies save lives and protect properties, making them true local heroes.',
-                                'link' => 'coming_soon.html',
+                                'link' => 'coming_soon.php',
                             ],
                             [
                                 'image' => 'images/fireman.jpg',
                                 'title' => 'Bravery Amidst Flames',
                                 'content' => 'Firefighters risk their lives to rescue people and animals trapped in burning buildings. Their heroic acts showcase unwavering courage and selflessness, embodying the true spirit of bravery.',
-                                'link' => 'coming_soon.html',
+                                'link' => 'coming_soon.php',
                             ],
                             [
                                 'image' => 'images/fireman2.jpg',
                                 'title' => 'Courage Under Pressure',
                                 'content' => 'Firefighters exhibit extraordinary courage under pressure, battling raging fires and hazardous conditions to ensure the safety of others.',
-                                'link' => 'coming_soon.html',
+                                'link' => 'coming_soon.php',
                             ],
                             // Add more blog entries as needed
                         ];
@@ -108,10 +108,10 @@
                 </div>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="blogs.html">1</a></li>
-                        <li class="page-item"><a class="page-link" href="coming_soon.html">2</a></li>
-                        <li class="page-item"><a class="page-link" href="coming_soon.html">3</a></li>
-                        <li class="page-item"><a class="page-link" href="coming_soon.html">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="blogs.php">1</a></li>
+                        <li class="page-item"><a class="page-link" href="coming_soon.php">2</a></li>
+                        <li class="page-item"><a class="page-link" href="coming_soon.php">3</a></li>
+                        <li class="page-item"><a class="page-link" href="coming_soon.php">Next</a></li>
                     </ul>
                 </nav>
             </div>

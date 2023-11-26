@@ -66,10 +66,10 @@
 
           <!-- Sidebar Navigation Links -->
           <div class="list-group mt-3">
-            <a href="admin_dashboard.html">Dashboard</a>
-            <a href="disaster_event.html">Disaster Event</a>
-            <a href="task_management.html">Task Management</a>
-            <a href="resource_management.html">Resource Management</a>
+            <a href="admin_dashboard.php">Dashboard</a>
+            <a href="disaster_event.php">Disaster Event</a>
+            <a href="task_management.php">Task Management</a>
+            <a href="resource_management.php">Resource Management</a>
           </div>
 
           <!-- Logout Link -->

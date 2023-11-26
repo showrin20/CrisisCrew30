@@ -109,21 +109,21 @@ if (!isset($_SESSION["username"])) {
       <div class="row">
         <!-- Sidebar -->
         <nav class="col-12 col-md-3 col-lg-2 sidebar">
-          <a href="index.html">
+          <a href="index.php">
             <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
           </a>
 
           <!-- Sidebar Navigation Links -->
           <div class="list-group mt-3">
-            <a href="admin_dashboard.html">Dashboard</a>
-            <a href="disaster_event.html">Disaster Event</a>
-            <a href="task_management.html">Task Management</a>
-            <a href="resource_management.html">Resource Management</a>
+            <a href="admin_dashboard.php">Dashboard</a>
+            <a href="disaster_event.php">Disaster Event</a>
+            <a href="task_management.php">Task Management</a>
+            <a href="resource_management.php">Resource Management</a>
           </div>
 
           <!-- Logout Link -->
           <footer class="mt-3">
-            <a href="index.html" style="color: #adb5bd">Logout</a>
+            <a href="index.php" style="color: #adb5bd">Logout</a>
           </footer>
         </nav>
 
@@ -186,7 +186,7 @@ if (!isset($_SESSION["username"])) {
   // Function to render the table rows based on the search criteria
   function renderTable(option, searchText) {
       const tableBody = document.getElementById('userTableBody');
-      tableBody.innerHTML = '';
+      tableBody.innerphp = '';
 
       // Filter users based on the selected option and search text
       const filteredUsers = users.filter(user => {

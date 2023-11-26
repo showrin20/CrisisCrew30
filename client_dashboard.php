@@ -32,7 +32,7 @@
       <div class="row">
         <!-- Sidebar -->
         <nav class="col-12 col-md-3 col-lg-2 sidebar">
-          <a href="index.html">
+          <a href="index.php">
             <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
           </a>
           <div class="list-group mt-3">

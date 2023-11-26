@@ -55,15 +55,16 @@ $skills = ["Fire Suppression Techniques", "Emergency Evacuation Planning"];
 
           <!-- Sidebar Navigation Links -->
           <div class="list-group mt-3">
-            <a href="admin_dashboard.html">Dashboard</a>
-            <a href="disaster_event.html">Disaster Event</a>
-            <a href="task_management.html">Task Management</a>
-            <a href="resource_management.html">Resource Management</a>
+          <a href="client_dashboard.php">Dashboard</a>
+            <a href="portfolio.php">Portfolio</a>
+            <a href="training.php">Training Module</a>
+            <a href="blogs.php">Blogs</a>
+            <a href="coming_soon.php">Community Forum</a>
           </div>
 
           <!-- Logout Link -->
           <footer class="mt-3">
-            <a href="index.html" style="color: #adb5bd">Logout</a>
+            <a href="index.php" style="color: #adb5bd">Logout</a>
           </footer>
         </nav>
 
@@ -101,7 +102,7 @@ $skills = ["Fire Suppression Techniques", "Emergency Evacuation Planning"];
 
             <!-- Add more sections for completed training modules, crisis responses, achievements, and skills if needed -->
 
-            <a href="edit_profile.html" class="btn btn-primary">Edit Profile</a>
+            <a href="register.php" class="btn btn-primary">Edit Profile</a>
         </div>
     </div>
 

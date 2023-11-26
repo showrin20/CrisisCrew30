@@ -27,7 +27,7 @@
     }
 
     .sidebar {
-        background-color: #343a40; /* Dark background color for the sidebar */
+        background-color: #1f1c3b; /* Dark background color for the sidebar */
         color: #dee2e6; /* Light text color for the sidebar */
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow for the sidebar */
     }
@@ -105,9 +105,9 @@
 
           <!-- Sidebar Navigation Links -->
           <div class="list-group mt-3">
-            <a href="index.html.html">Homepage</a>
-            <a href="login.html">Volunteer Log In</a>
-            <a href="login.html">Admin Log In</a>
+            <a href="index.php">Homepage</a>
+            <a href="client_login.php">Volunteer Log In</a>
+            <a href="login.php">Admin Log In</a>
           </div>
 
        
@@ -125,7 +125,7 @@
             <h5>Personal Information</h5>
 
      <form method="POST" action="process_form.php" enctype="multipart/form-data">
->
+
               <div class="form-row">
                 <!-- First Row -->
                 <div class="form-group col-md-6">

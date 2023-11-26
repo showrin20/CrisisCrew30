@@ -17,13 +17,13 @@
     <ul class="nav justify-content-end">
 
         <li class="nav-item">
-          <a class="nav-link" href="admin_dashboard.html">  <button type="button" class="btn btn-outline-dark btn-sm">
+          <a class="nav-link" href="login.php">  <button type="button" class="btn btn-outline-dark btn-sm">
             Admin Log In
         </button></a>
         
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="login.html">  <button type="button" class="btn btn-outline-dark btn-sm" >
+            <a class="nav-link" href="client_login.php">  <button type="button" class="btn btn-outline-dark btn-sm" >
                 Volunteer Log In
               </button></a>        </li>
       </ul>
@@ -44,7 +44,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-            <a class="navbar-brand" href="index.html"><img src="images/CrisisCrew.png" width="70px"></a>
+            <a class="navbar-brand" href="index.php"><img src="images/CrisisCrew.png" width="70px"></a>
 
             <li class="nav-item">
               <a class="nav-link" href="#banner">Discover Our Mission</a>
@@ -80,7 +80,7 @@
 
                 </p>
                 <button type="button" class="btn btn-outline-dark btn-sm">
-                  <a href="form1.html" style="text-decoration: none;"> Sign Up as Volunteer </a>
+                  <a href="register.php" style="text-decoration: none;"> Sign Up as Volunteer </a>
                  
                   </button>
                
