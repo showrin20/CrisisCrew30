@@ -99,19 +99,19 @@ CREATE TABLE User (
     Role ENUM('Admin', 'Volunteer', 'Global Volunteer') NOT NULL
 );
 
--- Create Volunteer Table
 CREATE TABLE Volunteer (
-    VolunteerID INT PRIMARY KEY AUTO_INCREMENT,
-    UserID INT UNIQUE,
-    FirstName VARCHAR(50) NOT NULL,
-    LastName VARCHAR(50) NOT NULL,
-    Email VARCHAR(255) NOT NULL,
-    Contact VARCHAR(15),
-    Address VARCHAR(255),
-    Location VARCHAR(50),
-    Gender ENUM('Male', 'Female', 'Other'),
-    BloodGroup VARCHAR(5),
-    DateOfBirth DATE,
+     id INT AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    contact VARCHAR(255),
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    address TEXT,
+    location VARCHAR(255),
+    gender ENUM('male', 'female', 'other') NOT NULL,
+    bloodGroup VARCHAR(255),
+    DOB DATE,
     Achievements TEXT,
     ProfilePhoto VARCHAR(255),
     FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE CASCADE
