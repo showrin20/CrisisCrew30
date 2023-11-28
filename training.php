@@ -24,20 +24,20 @@
       <div class="row">
         <!-- Sidebar -->
         <nav class="col-12 col-md-3 col-lg-2 sidebar">
-          <a href="index.html">
+          <a href="index.php">
             <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
           </a>
           <div class="list-group mt-3">
-            <a href="client_dashboard.html">Dashboard</a>
-            <a href="My Profile.html">My Profile</a>
+            <a href="client_dashboard.php">Dashboard</a>
+            <a href="My Profile.php">My Profile</a>
             <a href="#training-modules">Training Module</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="coming_soon.html">Community Forum</a>
+            <a href="blogs.php">Blogs</a>
+            <a href="coming_soon.php">Community Forum</a>
           </div>
 
           <!-- Logout Link -->
           <footer class="mt-3">
-            <a href="index.html">Logout</a>
+            <a href="index.php">Logout</a>
           </footer>
         </nav>
 

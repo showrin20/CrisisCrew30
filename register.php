@@ -101,7 +101,7 @@
       <div class="row">
         <!-- Sidebar -->
         <nav class="col-12 col-md-3 col-lg-2 sidebar">
-          <a href="index.html">
+          <a href="index.php">
             <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
           </a>
 
@@ -259,7 +259,7 @@
 
                 <!-- Additional Fields -->
                 <div class="form-group col-md-6">
-                  <label for="DOB" style="color: #676a6a"
+                  <label for="DOB" style="color: #676a6a"  
                     >Date Of Birth</label
                   >
                   <input
@@ -267,18 +267,18 @@
                     class="form-control"
                     id="DOB"
                     name="DOB"
-                    placeholder="Enter Your Past Experience"
+                    placeholder="Enter Your Date Of Birth"
                     required
                   />
                 </div>
-                <div class="form-group col-md-6">
+                <!-- <div class="form-group col-md-6">
                     <label for="Photo" style="color: #676a6a"
                       >Photo</label
                     >
                     <div class="input-group">
                         <input class="input--style-1" type="file" placeholder="file" name="file">
                     </div>
-                  </div>
+                  </div> -->
                   <div class="form-group col-md-6">
                     <label style="color: #676a6a;">Skills</label>
                     <div>

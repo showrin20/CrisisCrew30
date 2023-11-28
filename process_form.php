@@ -1,7 +1,5 @@
 <?php
-session_start();
-
-// Replace these with your actual database credentials
+// Connection parameters
 $servername = "localhost";
 $username = "sowadrahman";
 $password = "kikhobor";
@@ -15,52 +13,41 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetching form data
-$firstName = $_POST['firstName'];
-$lastName = $_POST['lastName'];
-$email = $_POST['email'];
-$contact = $_POST['contact'];
-$address = $_POST['address'];
-$location = $_POST['location'];
-$gender = $_POST['gender'];
-$bloodGroup = $_POST['bloodGroup'];
-$achievements = $_POST['DOB'];
-$username = $_POST['username']; // Add username
-$password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash and add password
+// Prepare statement
+$query = "INSERT INTO volunteers (firstName, lastName, email, contact, username, password, address, location, gender, bloodGroup, DOB, skills) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$stmt = $conn->prepare($query);
 
-// File handling
-$files = $_FILES['file'];
-$filename = $files['name'];
-$filetemp = $files['tmp_name'];
-$fileext = explode('.', $filename);
-$filecheck = strtolower(end($fileext));
-$fileextstored = array('png', 'jpg', 'jpeg');
-
-if (in_array($filecheck, $fileextstored)) {
-    $destinationfile = 'images/' . $filename;
-    move_uploaded_file($filetemp, $destinationfile);
-} else {
-    $destinationfile = 'images/ceo.jpg'; // Default image if file type is not allowed
+// Error checking for prepare statement
+if ($stmt === false) {
+    die("Error preparing statement: " . $conn->error);
 }
 
-// Checkbox skills handling
-$skills = isset($_POST['skills']) ? implode(', ', $_POST['skills']) : '';
+// Bind parameters and execute
+$stmt->bind_param("ssssssssssss", $firstName, $lastName, $email, $contact, $username, $password, $address, $location, $gender, $bloodGroup, $DOB, $skills);
 
-// Inserting data into the 'volunteers' table
-$sql = "INSERT INTO `volunteers`(`id`, `username`, `password`, `firstName`, `lastName`, `email`, `contact`, `address`, `location`, `gender`, `bloodGroup`, `achievements`, `skills`, `pic`)
-        VALUES ('', '$username', '$password', '$firstName', '$lastName', '$email', '$contact', '$address', '$location', '$gender', '$bloodGroup', '$achievements', '$skills', '$destinationfile')";
+// Set parameters and execute
+$firstName = mysqli_real_escape_string($conn, $_REQUEST['firstName']);
+$lastName = mysqli_real_escape_string($conn, $_REQUEST['lastName']);
+$email = mysqli_real_escape_string($conn, $_REQUEST['email']);
+$contact = mysqli_real_escape_string($conn, $_REQUEST['contact']);
+$username = mysqli_real_escape_string($conn, $_REQUEST['username']);
+$password = mysqli_real_escape_string($conn, $_REQUEST['password']); // Consider hashing the password
+$address = mysqli_real_escape_string($conn, $_REQUEST['address']);
+$location = mysqli_real_escape_string($conn, $_REQUEST['location']);
+$gender = mysqli_real_escape_string($conn, $_REQUEST['gender']);
+$bloodGroup = mysqli_real_escape_string($conn, $_REQUEST['bloodGroup']);
+$DOB = mysqli_real_escape_string($conn, $_REQUEST['DOB']);
+$skills = isset($_POST['skills']) ? mysqli_real_escape_string($conn, implode(', ', $_POST['skills'])) : '';
 
-$result = mysqli_query($conn, $sql);
-
-if ($result) {
-    echo ("<SCRIPT LANGUAGE='JavaScript'>
-    window.alert('Successfully Registered as a Volunteer')
-    window.location.href='client_login.php';
-    </SCRIPT>");
+if ($stmt->execute()) {
+    // Redirect to the login page on success
+    header('Location: client_login.php'); // Adjust this to your actual login page URL
+    exit();
 } else {
-    echo ("<SCRIPT LANGUAGE='JavaScript'>
-    window.alert('Failed to Register as a Volunteer')
-    window.location.href='client_login.php';
-    </SCRIPT>");
+    // Show error message and stay on the same page
+    echo "Error: " . $stmt->error;
 }
+
+$stmt->close();
+$conn->close();
 ?>

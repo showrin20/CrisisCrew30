@@ -132,7 +132,7 @@ if (!isset($_SESSION["username"])) {
         <!-- Main Content Area -->
         <div class="col-lg-10 col-md-9 col-12">
           <div class="welcome-message">
-            <h4 style="color: #343a40">Welcome, Admin John Smith!</h4>
+            <h4 style="color: #343a40">Welcome , <?php echo htmlspecialchars($_SESSION['username']); ?>!</h4>
             <p style="color: #6c757d">
               You have administrative privileges to manage Crisis Crew
               activities.
@@ -240,7 +240,7 @@ if (!isset($_SESSION["username"])) {
         />
       </div>
       <div class="col-lg-8 col-md-8 col-12">
-        <h5 style="color: #343a40">Tanvir Jawad</h5>
+        <h5 style="color: #343a40"><?php echo htmlspecialchars($_SESSION['username']); ?></h5>
         <p style="color: #6c757d">
           Role: admin<br />
           Email:jawad@example.com<br />

@@ -1,5 +1,15 @@
+<?php
+session_start(); // Start the session
 
+// Check if the user is logged in
+if (!isset($_SESSION['username'])) {
+    // Redirect to login page if not logged in
+    header('Location: client_login.php');
+    exit();
+}
 
+// Display the dashboard
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,8 +62,7 @@
 
         <div class="col-lg-10 col-md-9 col-12">
           <div class="welcome-message">
-            <h4>Welcome, John Smith!</h4>
-            <p style="color: #676a6a">
+          <h4>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h4>            <p style="color: #676a6a">
               You are a <b>Crisis Cadet:</b> Progressing through 4 steps. Become
               a Crisis Captain upon completing 10 modules!
             </p>
