@@ -16,7 +16,7 @@ if (!isset($_SESSION["username"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/CrisisCrew.png" type="image/x-icon">
 
-    <title>Volunteer Sign Up</title>
+    <title>Add Event </title>
 
     <!-- Bootstrap CSS -->
     <link

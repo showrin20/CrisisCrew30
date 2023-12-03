@@ -16,7 +16,7 @@ if (!isset($_SESSION["username"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/CrisisCrew.png" type="image/x-icon">
 
-    <title>Task Management </title>
+    <title>Add Task </title>
 
     <!-- Bootstrap CSS -->
     <link
@@ -135,72 +135,62 @@ if (!isset($_SESSION["username"])) {
           <div class="welcome-message">
             <h4 style="color: #343a40">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h4>
             <p style="color: #6c757d">
-            Find Your Cause, Make a Difference , Your Gateway to Meaningful Impact. 
+              Find Your Cause, Make a Difference , Your
+              Gateway to Meaningful Impact.
             </p>
+            <div class="container mt-4">
+    <h5>Add Task </h5>
+    <form method="POST" action="add_task_process.php" enctype="multipart/form-data">
+        <div class="form-row">
+            <!-- Event ID -->
+            <div class="form-group col-md-6">
+                <label for="event_id" style="color: #676a6a">Event ID</label>
+                <input type="number" class="form-control" id="event_id" name="event_id" placeholder="Enter Event ID" required />
+            </div>
+<!-- Task Name -->
+<div class="form-group col-md-6">
+                <label for="name" style="color: #676a6a">Task Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Task Name" required />
+            </div>
+            <!-- Task Description -->
+            <div class="form-group col-md-6">
+                <label for="task_description" style="color: #676a6a">Task Description</label>
+                <textarea class="form-control" id="task_description" name="task_description" placeholder="Enter Task Description" required></textarea>
+            </div>
 
-            <div class="container">
-                <h5 class="text-left mb-4">Task Management Table</h5>
-                <a href="add_task.php" class="btn btn-primary mb-3">Add Tasks for Event</a>
+            <!-- Task Status -->
+            <div class="form-group col-md-6">
+                <label for="status" style="color: #676a6a">Task Status</label>
+                <select class="form-control" id="status" name="status" required>
+                    <option value="done">Assigned</option>
+                  
+                    <option value="not_assigned">Not Assigned</option>
+                </select>
+            </div>
 
-                <div class="table-responsive">
-    <?php
-    // Database connection settings
-    $servername = "localhost";
-    $dbUsername = "sowadrahman";
-    $dbPassword = "kikhobor";
-    $dbname = "crisiscrew20"; // Change to the "event" database
+            
+        </div>
 
-    // Create a connection to the database
-    $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
-
-    // Check the connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // SQL query to retrieve data from the task_event table
-    $sql = "SELECT task_id, event_id, task_description, status, name FROM task_event";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        echo '<table class="table table-striped table-bordered">';
-        echo '<thead class="thead-dark">';
-        echo '<tr>';
-        echo '<th scope="col">Task ID</th>';
-        echo '<th scope="col">Event ID</th>';
-        echo '<th scope="col">Task Description</th>';
-        echo '<th scope="col">Status</th>';
-        echo '<th scope="col">Name</th>';
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
-
-        while ($row = $result->fetch_assoc()) {
-            echo '<tr>';
-            echo '<td>' . $row['task_id'] . '</td>';
-            echo '<td>' . $row['event_id'] . '</td>';
-            echo '<td>' . $row['task_description'] . '</td>';
-            echo '<td>' . $row['status'] . '</td>';
-            echo '<td>' . $row['name'] . '</td>';
-            echo '</tr>';
-        }
-
-        echo '</tbody>';
-        echo '</table>';
-    } else {
-        echo "No records found";
-    }
-
-    // Close the database connection
-    $conn->close();
-    ?>
+        <!-- Action Button -->
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-primary btn-block">Add Task Event</button>
+        </div>
+    </form>
 </div>
 
-              </div>
 
 
-    <!-- Bootstrap JS and Custom Script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="myscript.js"></script>
+          
+          
+          
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

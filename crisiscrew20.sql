@@ -75,7 +75,7 @@ CREATE TABLE volunteers (
 INSERT INTO volunteers (firstName, lastName, email, contact, address, location, gender, bloodGroup, DOB, skills, username, password)
 VALUES
 ('John', 'Doe', 'john@example.com', '1234567890', '123 Main St', 'Cityville', 'male', 'O+', '1990-01-01', 'First Aid, Fire Safety', 'john_doe', '1234'),
-('Jane', 'Doe', 'jane@example.com', '9876543210', '456 Oak St', 'Townsville', 'female', 'A-', '1992-03-15', 'CPR, Disaster Management', 'jane_doe', '1234');
+('Jane', 'Doe', 'jane@example.com', '9876543210', '456 Oak St', 'Townsville', 'female', 'A-', '1992-03-15', 'CPR, Disaster Management', 'volunteer', '1234');
 
 
 COMMIT;
@@ -100,4 +100,22 @@ INSERT INTO `event` (`name`, `description`, `location`, `date`, `address`) VALUE
 
 
 
+COMMIT;
+
+
+CREATE TABLE task_event (
+    task_id INT AUTO_INCREMENT PRIMARY KEY,
+    event_id INT,
+    task_description TEXT,
+    status ENUM('assigned', 'not assigned'),
+    name VARCHAR(255),
+    FOREIGN KEY (event_id) REFERENCES event(event_id)
+);
+
+INSERT INTO task_event (event_id, task_description, status, name)
+VALUES
+    (1, 'Prepare event materials', 'assigned', 'Task 1'),
+    (2, 'Set up event venue', 'not assigned', 'Task 2'),
+    (2, 'Coordinate volunteers', 'not assigned', 'Task 3'),
+    (3, 'Finalize event logistics', 'assigned', 'Task 4');
 COMMIT;
