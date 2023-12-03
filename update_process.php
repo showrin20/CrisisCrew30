@@ -45,7 +45,7 @@ if (isset($_POST['skills']) && is_array($_POST['skills'])) {
 
 if ($stmt->execute()) {
     // Redirect to the profile page on success
-    header('Location:'); // Adjust this to your actual profile page URL
+    header('Location:My Profile.php'); // Adjust this to your actual profile page URL
     exit();
 } else {
     // Show error message and stay on the same page
