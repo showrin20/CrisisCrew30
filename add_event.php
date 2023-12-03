@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION["username"])) {
+    // If not logged in, redirect to the login page
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -97,7 +108,7 @@
   </head>
 
   <body>
-    <div class="container-fluid">
+  <div class="container-fluid">
       <div class="row">
         <!-- Sidebar -->
         <nav class="col-12 col-md-3 col-lg-2 sidebar">
@@ -107,190 +118,71 @@
 
           <!-- Sidebar Navigation Links -->
           <div class="list-group mt-3">
-            <a href="index.php">Homepage</a>
-            <a href="client_login.php">Volunteer Log In</a>
-            <a href="login.php">Admin Log In</a>
+            <a href="admin_dashboard.php">Dashboard</a>
+            <a href="disaster_event.php">Disaster Event</a>
+            <a href="task_management.php">Task Management</a>
+            <a href="resource_management.php">Resource Management</a>
           </div>
 
-       
+          <!-- Logout Link -->
+          <footer class="mt-3">
+            <a href="index.php" style="color: #adb5bd">Logout</a>
+          </footer>
         </nav>
 
         <!-- Main Content Area -->
         <div class="col-lg-10 col-md-9 col-12">
           <div class="welcome-message">
-            <h4 style="color: #343a40">Welcome,  </h4>
+            <h4 style="color: #343a40">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h4>
             <p style="color: #6c757d">
-              You have administrative privileges to manage Crisis Crew
-              activities.
+              Find Your Cause, Make a Difference , Your
+              Gateway to Meaningful Impact.
             </p>
 
-            <h5>Personal Information</h5>
+            <h5>Add Events</h5>
+            <form method="POST" action="add_event_process.php" enctype="multipart/form-data">
+    <div class="form-row">
+        <!-- Event Name -->
+        <div class="form-group col-md-6">
+            <label for="name" style="color: #676a6a">Event Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Event Name" required />
+        </div>
 
-     <form method="POST" action="process_form.php" enctype="multipart/form-data">
+        <!-- Event Description -->
+        <div class="form-group col-md-6">
+            <label for="description" style="color: #676a6a">Event Description</label>
+            <textarea class="form-control" id="description" name="description" placeholder="Enter Event Description" required></textarea>
+        </div>
 
-              <div class="form-row">
-                <!-- First Row -->
-                <div class="form-group col-md-6">
-                  <label for="firstName" style="color: #676a6a"
-                    >First Name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="firstName"
-                    name="firstName"
-                    placeholder="Enter First Name"
-                    required
-                  />
-                </div>
+        <!-- Event Location -->
+        <div class="form-group col-md-6">
+            <label for="location" style="color: #676a6a">Event Location</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Enter Event Location" required />
+        </div>
 
-                <div class="form-group col-md-6">
-                  <label for="lastName" style="color: #676a6a">Last Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="lastName"
-                    name="lastName"
-                    placeholder="Enter Last Name"
-                    required
-                  />
-                </div>
+        <!-- Event Date -->
+        <div class="form-group col-md-6">
+            <label for="date" style="color: #676a6a">Event Date</label>
+            <input type="date" class="form-control" id="date" name="date" required />
+        </div>
 
-                <!-- Second Row -->
-                <div class="form-group col-md-6">
-                  <label for="email" style="color: #676a6a">Email</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Enter Email"
-                    required
-                  />
-                </div>
+        <!-- Event Address -->
+        <div class="form-group col-md-12">
+            <label for="address" style="color: #676a6a">Event Address</label>
+            <textarea class="form-control" id="address" name="address" placeholder="Enter Event Address" required></textarea>
+        </div>
+    </div>
 
-                <div class="form-group col-md-6">
-                  <label for="contact" style="color: #676a6a">Contact</label>
-                  <input
-                    type="tel"
-                    class="form-control"
-                    id="contact"
-                    name="contact"
-                    placeholder="Enter Contact Number"
-                    required
-                  />
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="email" style="color: #676a6a">Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    name="username"
-                    placeholder="Enter username"
-                    required
-                  />
-                </div>
+    <!-- Action Button -->
+    <div class="form-group col-md-12">
+        <button type="submit" class="btn btn-primary btn-block">Submit Event</button>
+    </div>
+</form>
 
-                <div class="form-group col-md-6">
-                  <label for="password" style="color: #676a6a">Password</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="password"
-                    name="password"
-                    placeholder="Enter password"
-                    required
-                  />
-                </div>
 
-                <!-- Third Row -->
-                <div class="form-group col-md-6">
-                  <label for="address" style="color: #676a6a">Address</label>
-                  <textarea
-                    class="form-control"
-                    id="address"
-                    name="address"
-                    placeholder="Enter Address"
-                    required
-                  ></textarea>
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label for="location" style="color: #676a6a">Location</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="location"
-                    name="location"
-                    placeholder="Enter Location"
-                    required
-                  />
-                </div>
-
-                <!-- Fourth Row -->
-                <div class="form-group col-md-6">
-                  <label for="gender" style="color: #676a6a">Gender</label>
-                  <select
-                    class="form-control"
-                    id="gender"
-                    name="gender"
-                    required
-                  >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label for="bloodGroup" style="color: #676a6a"
-                    >Blood Group</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="bloodGroup"
-                    name="bloodGroup"
-                    placeholder="Enter Blood Group"
-                    required
-                  />
-                </div>
-
-                <!-- Additional Fields -->
-                <div class="form-group col-md-6">
-                  <label for="DOB" style="color: #676a6a"  
-                    >Date Of Birth</label
-                  >
-                  <input
-                    type="date"
-                    class="form-control"
-                    id="DOB"
-                    name="DOB"
-                    placeholder="Enter Your Date Of Birth"
-                    required
-                  />
-                </div>
-                <!-- <div class="form-group col-md-6">
-                    <label for="Photo" style="color: #676a6a"
-                      >Photo</label
-                    >
-                    <div class="input-group">
-                        <input class="input--style-1" type="file" placeholder="file" name="file">
-                    </div>
-                  </div> -->
-               
-                
-            
-                
-
-              <!-- Action Button -->
-              <div class="form-group col-md-12">
-                <button type="submit" class="btn btn-primary btn-block">
-                  Submit
-                </button>
-              </div>
-            </form>
+          
+          
+          
           </div>
         </div>
       </div>

@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION["username"])) {
+    // If not logged in, redirect to the login page
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -83,7 +94,7 @@
         <!-- Main Content Area -->
         <div class="col-lg-10 col-md-9 col-12">
           <div class="welcome-message">
-            <h4 style="color: #343a40">Welcome, Admin John Smith!</h4>
+            <h4 style="color: #343a40">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h4>
             <p style="color: #6c757d">
               Find Your Cause, Make a Difference - VolunteerConnect, Your
               Gateway to Meaningful Impact.
@@ -91,68 +102,62 @@
     
                 <div class="container">
                   <h5 class="text-left mb-4">Event Management</h5>
-                  <button href="add_event.php"g
-                              class="btn btn-primary  mb-3"
-                              
-                            >
-                              Add Event
-                            </button>
+                
 
+                  <a href="add_event.php" class="btn btn-primary mb-3">Add Event</a>
                   <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <thead class="thead-dark">
+                  <?php
+// Database connection settings
+$servername = "localhost";
+$dbUsername = "sowadrahman";
+$dbPassword = "kikhobor";
+$dbname = "crisiscrew20"; // Change to the "event" database
 
-                        <tr>
-                          <th>Event Name</th>
-                          <th>Description</th>
-                          <th>Location</th>
-                          <th>Skills Needed</th>
-                          <th>Resources Needed</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Event 1</td>
-                          <td>Description 1</td>
-                          <td>Location 1</td>
-                          <td>Skill 1, Skill 2</td>
-                          <td>Resource 1, Resource 2</td>
-                        </tr>
-                        <tr>
-                          <td>Event 2</td>
-                          <td>Description 2</td>
-                          <td>Location 2</td>
-                          <td>Skill 2, Skill 3</td>
-                          <td>Resource 3, Resource 4</td>
-                        </tr>
-                        <!-- Add more rows for additional events -->
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="container">
-                  <h5 class="text-left mb-4">Volunteer Search</h5>
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <label for="filterSkills">Filter by Skills:</label>
-                      <select id="filterSkills" class="form-control">
-                        <option>All</option>
-                        <option>Skill 1</option>
-                        <option>Skill 2</option>
-                        <option>Skill 3</option>
-                        <!-- Add more skills as needed -->
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="filterLocation">Filter by Location:</label>
-                      <select id="filterLocation" class="form-control">
-                        <option>All</option>
-                        <option>Location 1</option>
-                        <option>Location 2</option>
-                        <option>Location 3</option>
-                        <!-- Add more locations as needed -->
-                      </select>
-                    </div>
+// Create a connection to the database
+$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// SQL query to retrieve data from the event table
+$sql = "SELECT event_id, name, description, location, date FROM event";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo '<table class="table table-striped table-bordered">';
+    echo '<thead class="thead-dark">';
+    echo '<tr>';
+    echo '<th scope="col">Event ID</th>';
+    echo '<th scope="col">Event Name</th>';
+    echo '<th scope="col">Event Description</th>';
+    echo '<th scope="col">Event Location</th>';
+    echo '<th scope="col">Event Date</th>';
+    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
+
+    while ($row = $result->fetch_assoc()) {
+        echo '<tr>';
+        echo '<td>' . $row['event_id'] . '</td>';
+        echo '<td>' . $row['name'] . '</td>';
+        echo '<td>' . $row['description'] . '</td>';
+        echo '<td>' . $row['location'] . '</td>';
+        echo '<td>' . $row['date'] . '</td>';
+        echo '</tr>';
+    }
+
+    echo '</tbody>';
+    echo '</table>';
+} else {
+    echo "No records found";
+}
+
+// Close the database connection
+$conn->close();
+?>
+
                   </div>
 
                   <h3 class="text-center mb-4">Volunteer List</h3>

@@ -143,40 +143,61 @@ if (!isset($_SESSION['username'])) {
               <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="table-container">
                   <h5 class="mb-4">Today's Fire Incidents</h5>
-                  <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Details</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- Incident Row 1 -->
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>City Park</td>
-                        <td>10:30 AM</td>
-                        <td>
-                          Fire broke out in the city park. Volunteers needed to
-                          assist with evacuation and support.
-                        </td>
-                      </tr>
-                      <!-- Incident Row 2 -->
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Residential Area</td>
-                        <td>11:45 AM</td>
-                        <td>
-                          Fire incident reported in a residential area.
-                          Volunteers required for distributing emergency
-                          supplies.
-                        </td>
-                      </tr>
-                      <!-- Add more rows as needed -->
-                    </tbody>
-                  </table>
+                  <?php
+// Database connection settings
+$servername = "localhost";
+$dbUsername = "sowadrahman";
+$dbPassword = "kikhobor";
+$dbname = "crisiscrew20"; 
+$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Get today's date
+$today = date("Y-m-d");
+
+// SQL query to retrieve today's events
+$sql = "SELECT event_id, name, description, location, date FROM event WHERE date = '$today'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo '<table class="table table-striped table-bordered">';
+    echo '<thead class="thead-dark">';
+    echo '<tr>';
+    echo '<th scope="col">No.</th>';
+    echo '<th scope="col">Location</th>';
+    echo '<th scope="col">Time</th>';
+    echo '<th scope="col">Details</th>';
+    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
+
+    while ($row = $result->fetch_assoc()) {
+        echo '<tr>';
+        echo '<th scope="row">' . $row['event_id'] . '</th>';
+        echo '<td>' . $row['location'] . '</td>';
+        // You may need to adjust the time format based on your database schema
+        echo '<td>' . date("h:i A", strtotime($row['date'])) . '</td>';
+        echo '<td>' . $row['description'] . '</td>';
+        echo '</tr>';
+    }
+
+    echo '</tbody>';
+    echo '</table>';
+} else {
+    echo "No event today";
+}
+
+// Close the database connection
+$conn->close();
+?>
+
+
+
+
                 </div>
               </div>
             </div>

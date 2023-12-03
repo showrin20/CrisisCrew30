@@ -86,14 +86,18 @@ CREATE TABLE `event` (
   `name` VARCHAR(255) NOT NULL,
   `description` TEXT,
   `location` VARCHAR(255),
-  `date` DATE
+  `date` DATE,
+  `address` TEXT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-INSERT INTO `event` (`name`, `description`, `location`, `date`) VALUES
-('Event 1', 'Description for Event 1', 'Location A', '2023-01-15'),
-('Event 2', 'Description for Event 2', 'Location B', '2023-02-20'),
-('Event 3', 'Description for Event 3', 'Location C', '2023-03-25');
+
+INSERT INTO `event` (`name`, `description`, `location`, `date`, `address`) VALUES
+('Annual Charity Gala', 'Fundraising event for local charities', 'City Convention Center', '2023-05-20', '123 Main Street, Cityville'),
+('Tech Conference 2023', 'Conference on the latest technology trends', 'Tech Park Auditorium', '2023-06-15', '456 Tech Avenue, Techtown'),
+('Community Cleanup Day', 'Volunteer event to clean up the neighborhood', 'City Park', '2023-07-10', '789 Green Lane, Greenvale'),
+('Art Exhibition Opening', 'Opening of a new art exhibition', 'Art Gallery Center', '2023-08-05', '101 Art Street, Artville');
+
 
 
 COMMIT;
