@@ -109,7 +109,7 @@ $conn->close();
 
         <div class="col-lg-10 col-md-9 col-12">
           <div class="welcome-message">
-            <h4 style="color: #343a40">Welcome, <?php echo $firstName ?? ''; ?></h4>
+            <h4 style="color: #343a40">Welcome, <?php echo $username ?? ''; ?></h4>
             <p style="color: #6c757d">
               Find Your Cause, Make a Difference , Your
               Gateway to Meaningful Impact.
@@ -136,7 +136,7 @@ $conn->close();
         </p>
 
 
-            <a href="register.php" class="btn btn-primary">Edit Profile</a>
+            <a href="update_volunteer.php" class="btn btn-primary">Edit Profile</a>
         </div>
     </div>
 

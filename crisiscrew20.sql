@@ -119,3 +119,22 @@ VALUES
     (2, 'Coordinate volunteers', 'not assigned', 'Task 3'),
     (3, 'Finalize event logistics', 'assigned', 'Task 4');
 COMMIT;
+-- Create the resource table with a foreign key reference to event_task
+CREATE TABLE resource (
+    resource_id INT AUTO_INCREMENT PRIMARY KEY,
+    task_id INT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    FOREIGN KEY (task_id) REFERENCES event_task(task_id)
+);
+
+-- Insert data with task names from event_task
+INSERT INTO resource (task_id, name, description) VALUES
+    (1, (SELECT name FROM event_task WHERE task_id = 1), 'Fire extinguisher for emergencies'),
+    (1, (SELECT name FROM event_task WHERE task_id = 1), 'Water hose for firefighting'),
+    (1, (SELECT name FROM event_task WHERE task_id = 1), 'Fire blanket for safety'),
+    (1, (SELECT name FROM event_task WHERE task_id = 1), 'First aid kit for medical emergencies'),
+    (2, (SELECT name FROM event_task WHERE task_id = 2), 'Rescue Equipment for evacuations'),
+    (2, (SELECT name FROM event_task WHERE task_id = 2), 'Flashlights for visibility'),
+    (2, (SELECT name FROM event_task WHERE task_id = 2), 'Communication Devices for coordination'),
+    -- Add more resources and tasks as needed
