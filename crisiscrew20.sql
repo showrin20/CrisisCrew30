@@ -34,32 +34,6 @@ SET time_zone = "+00:00";
 -- Database: `admin_panel`
 --
 
--- --------------------------------------------------------
-
---
--- Table structure for table `clients`
---
-
-CREATE TABLE `clients` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `skills` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `clients`
---
-
-INSERT INTO `clients` (`id`, `name`, `skills`) VALUES
-(1, 'John Doe', 'PHP, MySQL, JavaScript'),
-(2, 'Jane Smith', 'HTML, CSS, Python'),
-(3, 'Bob Johnson', 'Java, SQL, C#');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
 
 CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
@@ -72,44 +46,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `password`) VALUES
 ('sowadrahman', 'kikhobor');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `clients`
---
-ALTER TABLE `clients`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `clients`
---
-ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-
-
-
-
-
-
-
-
-
-
-
+INSERT INTO `users` (`username`, `password`) VALUES
+('admin', 'admin');
 
 
 
@@ -132,9 +70,7 @@ CREATE TABLE volunteers (
 
 
 
---
--- Inserting data for table `volunteers`
---
+
 
 INSERT INTO volunteers (firstName, lastName, email, contact, address, location, gender, bloodGroup, DOB, skills, username, password)
 VALUES
@@ -144,3 +80,20 @@ VALUES
 
 COMMIT;
 
+-- Table structure for table `event`
+CREATE TABLE `event` (
+  `event_id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(255) NOT NULL,
+  `description` TEXT,
+  `location` VARCHAR(255),
+  `date` DATE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `event` (`name`, `description`, `location`, `date`) VALUES
+('Event 1', 'Description for Event 1', 'Location A', '2023-01-15'),
+('Event 2', 'Description for Event 2', 'Location B', '2023-02-20'),
+('Event 3', 'Description for Event 3', 'Location C', '2023-03-25');
+
+
+COMMIT;

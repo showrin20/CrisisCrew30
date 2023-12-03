@@ -91,9 +91,17 @@
     
                 <div class="container">
                   <h5 class="text-left mb-4">Event Management</h5>
+                  <button href="add_event.php"g
+                              class="btn btn-primary  mb-3"
+                              
+                            >
+                              Add Event
+                            </button>
+
                   <div class="table-responsive">
                     <table class="table table-bordered">
                       <thead class="thead-dark">
+
                         <tr>
                           <th>Event Name</th>
                           <th>Description</th>

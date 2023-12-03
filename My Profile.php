@@ -65,27 +65,25 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css"/>
 
     <link rel="icon" href="images/CrisisCrew.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css"/>
 
-    <!-- Additional Styles -->
     <style>
           body {
-            background-color: #f8f9fa; /* Set a light background color */
+            background-color: #f8f9fa; 
         }
 
         .container-fluid {
-            margin-top: 20px; /* Add margin at the top for spacing */
+            margin-top: 20px; 
         }
 
         .welcome-message {
-            background-color: #fff; /* Set a white background color for the user profile */
-            padding: 20px; /* Add padding for spacing */
-            border-radius: 8px; /* Add border radius for rounded corners */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+            background-color: #fff; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
         }
     </style>
 </head>
@@ -93,28 +91,22 @@ $conn->close();
     
 <div class="container-fluid">
       <div class="row">
-        <!-- Sidebar -->
         <nav class="col-12 col-md-3 col-lg-2 sidebar">
           <a href="index.php">
             <img src="images/CrisisCrew.png" alt="logo" class="img-fluid" />
           </a>
 
-          <!-- Sidebar Navigation Links -->
           <div class="list-group mt-3">
           <a href="client_dashboard.php">Dashboard</a>
             <a href="My Profile.php">My Profile</a>
-            <a href="training.php">Training Module</a>
-            <a href="blogs.php">Blogs</a>
-            <a href="coming_soon.php">Community Forum</a>
+  
           </div>
 
-          <!-- Logout Link -->
           <footer class="mt-3">
             <a href="index.php" style="color: #adb5bd">Logout</a>
           </footer>
         </nav>
 
-        <!-- Main Content Area -->
         <div class="col-lg-10 col-md-9 col-12">
           <div class="welcome-message">
             <h4 style="color: #343a40">Welcome, <?php echo $firstName ?? ''; ?></h4>
@@ -143,13 +135,11 @@ $conn->close();
             </ul>
         </p>
 
-            <!-- Add more sections for completed training modules, crisis responses, achievements, and skills if needed -->
 
             <a href="register.php" class="btn btn-primary">Edit Profile</a>
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies (optional) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

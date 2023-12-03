@@ -144,88 +144,38 @@ if (!isset($_SESSION["username"])) {
   <div class="col-lg-8 col-md-8 col-12">
  
 <div class="container mt-4">
-  <h5>User Search</h5>
-  
-  <div class="row mb-3">
-      <div class="col-md-6">
-          <select id="searchOption" class="form-control">
-              <option value="location">Location</option>
-              <option value="age">Age</option>
-              <option value="bloodGroup">Blood Group</option>
-          </select>
-      </div>
-      <div class="col-md-6">
+<h5>User Search</h5>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <select id="searchOption" class="form-control">
+            <option value="location">Location</option>
+            <option value="age">Age</option>
+            <option value="bloodGroup">Blood Group</option>
+        </select>
+    </div>
+    <div class="col-md-6">
         <input type="text" id="searchInput" class="form-control" placeholder="Search...">
     </div>
-  </div>
+</div>
 
-  <table class="table table-bordered">
-      <thead>
-      <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Age</th>
-          <th>Blood Group</th>
-      </tr>
-      </thead>
-      <tbody id="userTableBody">
-          <!-- Table rows will be added here -->
-      </tbody>
-  </table>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Age</th>
+            <th>Blood Group</th>
+        </tr>
+    </thead>
+    <tbody id="userTableBody">
+        <!-- Table rows will be added here -->
+    </tbody>
+</table>
 </div>
 
 
-
-<script>
-  // Sample user data
-  const users = [
-      { id: 1, name: 'John Doe', location: 'City A', age: 30, bloodGroup: 'A+' },
-      { id: 2, name: 'Jane Doe', location: 'City B', age: 25, bloodGroup: 'O-' },
-      // Add more user data as needed
-  ];
-
-  // Function to render the table rows based on the search criteria
-  function renderTable(option, searchText) {
-      const tableBody = document.getElementById('userTableBody');
-      tableBody.innerphp = '';
-
-      // Filter users based on the selected option and search text
-      const filteredUsers = users.filter(user => {
-          const searchValue = user[option].toString().toLowerCase();
-          return searchValue.includes(searchText.toLowerCase());
-      });
-
-      // Populate the table with filtered users
-      filteredUsers.forEach(user => {
-          const row = `<tr>
-                          <td>${user.id}</td>
-                          <td>${user.name}</td>
-                          <td>${user.location}</td>
-                          <td>${user.age}</td>
-                          <td>${user.bloodGroup}</td>
-                      </tr>`;
-          tableBody.innerHTML += row;
-      });
-  }
-
-  // Event listener for input changes in the search bar
-  document.getElementById('searchInput').addEventListener('input', function() {
-      const selectedOption = document.getElementById('searchOption').value;
-      const searchText = this.value;
-      renderTable(selectedOption, searchText);
-  });
-
-  // Event listener for dropdown changes
-  document.getElementById('searchOption').addEventListener('change', function() {
-      const selectedOption = this.value;
-      const searchText = document.getElementById('searchInput').value;
-      renderTable(selectedOption, searchText);
-  });
-
-  // Initial rendering of the table
-  renderTable('location', '');
-</script>
 
 
 
@@ -265,53 +215,65 @@ if (!isset($_SESSION["username"])) {
   <div class="table-container">
       <h5 class="mb-4">Volunteer List</h5>
       <div class="table-responsive">
-          <table class="table table-striped table-bordered">
-              <thead class="thead-dark">
-                  <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Age</th>
-                      <th scope="col">Blood Group</th>
-                      <th scope="col">Location</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Phone</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <!-- Volunteer Row 1 -->
-                  <tr id="volunteer1">
-                      <td>1</td>
-                      <td>Volunteer 1</td>
-                      <td>25</td>
-                      <td>O+</td>
-                      <td>City Park</td>
-                      <td>volunteer1@example.com</td>
-                      <td>+1 123-456-7890</td>
-                  </tr>
-                  <!-- Volunteer Row 2 -->
-                  <tr id="volunteer2">
-                      <td>2</td>
-                      <td>Volunteer 2</td>
-                      <td>30</td>
-                      <td>A-</td>
-                      <td>Residential Area</td>
-                      <td>volunteer2@example.com</td>
-                      <td>+1 987-654-3210</td>
-                  </tr>
-                  <!-- Add more rows for additional volunteers -->
-              </tbody>
-          </table>
+      <?php
+        // Database connection settings
+   $servername = "localhost";
+$dbUsername = "sowadrahman";
+$dbPassword= "kikhobor";
+$dbname = "crisiscrew20";
+
+        // Create a connection to the database
+        $conn = new mysqli($servername, $dbUsername,$dbPassword, $dbname);
+
+        // Check the connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // SQL query to retrieve data from the volunteers table
+        $sql = "SELECT id, CONCAT(firstName, ' ', lastName) AS Name, gender, bloodGroup, location, email, contact FROM volunteers";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+          echo '<table class="table table-striped table-bordered">';
+          echo '<thead class="thead-dark">';
+          echo '<tr>';
+          echo '<th scope="col">ID</th>';
+          echo '<th scope="col">Name</th>';
+          echo '<th scope="col">Gender</th>';
+          echo '<th scope="col">Blood Group</th>';
+          echo '<th scope="col">Location</th>';
+          echo '<th scope="col">Email</th>';
+          echo '<th scope="col">Phone</th>';
+          echo '</tr>';
+          echo '</thead>';
+          echo '<tbody>';
+
+          while ($row = $result->fetch_assoc()) {
+              echo '<tr>';
+              echo '<td>' . $row['id'] . '</td>';
+              echo '<td>' . $row['Name'] . '</td>';
+              echo '<td>' . $row['gender'] . '</td>';
+              echo '<td>' . $row['bloodGroup'] . '</td>';
+              echo '<td>' . $row['location'] . '</td>';
+              echo '<td>' . $row['email'] . '</td>';
+              echo '<td>' . $row['contact'] . '</td>';
+              echo '</tr>';
+          }
+
+          echo '</tbody>';
+          echo '</table>';
+      } else {
+          echo "No records found";
+      }
+
+      // Close the database connection
+      $conn->close();
+      ?>
       </div>
 
-      <!-- Pagination -->
-      <nav aria-label="Volunteer List Pagination">
-          <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <!-- Add more pagination links as needed -->
-          </ul>
-      </nav>
+
+    
   </div>
 </div>
 
@@ -322,6 +284,3 @@ if (!isset($_SESSION["username"])) {
 <script src="myscript.js"></script>
 </body>
 </html>
-<?php
-echo '<a href="logout.php">Logout</a>';
-?>

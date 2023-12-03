@@ -49,9 +49,7 @@ if (!isset($_SESSION['username'])) {
           <div class="list-group mt-3">
             <a href="client_dashboard.php">Dashboard</a>
             <a href="My Profile.php">My Profile</a>  
-            <a href="training.php">Training Module</a>
-            <a href="blogs.php">Blogs</a>
-            <a href="coming_soon.php">Community Forum</a>
+           
           </div>
 
           <!-- Logout Link -->
@@ -86,7 +84,7 @@ if (!isset($_SESSION['username'])) {
                     />
                   </div>
                   <div class="col-lg-8 col-md-8 col-12">
-                    <h5 style="color: #343a40">Showrin Rahman</h5>
+                    <h5 style="color: #343a40"><?php echo htmlspecialchars($_SESSION['username']); ?></h5>
                     <p style="color: #6c757d">
                       Role: Volunteer<br />
                       Email:showrin@example.com<br />
