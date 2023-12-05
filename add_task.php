@@ -158,16 +158,6 @@ if (!isset($_SESSION["username"])) {
                 <textarea class="form-control" id="task_description" name="task_description" placeholder="Enter Task Description" required></textarea>
             </div>
 
-            <!-- Task Status -->
-            <div class="form-group col-md-6">
-                <label for="status" style="color: #676a6a">Task Status</label>
-                <select class="form-control" id="status" name="status" required>
-                    <option value="done">Assigned</option>
-                  
-                    <option value="not_assigned">Not Assigned</option>
-                </select>
-            </div>
-
             
         </div>
 

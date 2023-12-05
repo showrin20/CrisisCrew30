@@ -252,19 +252,19 @@
           <div class="form-container">
             <h3>Contact Us</h3>
 
+            <form action="submit_contact_form.php" method="POST">
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="Your Name" required style="margin-bottom: 15px;">
+    </div>
+    <div class="form-group">
+        <input type="email" class="form-control" name="email" placeholder="Your Email" required style="margin-bottom: 15px;">
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" name="message" rows="3" placeholder="Your Message" required style="margin-bottom: 15px;"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-            <form action="/submit_contact_form" method="POST">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="name" placeholder="Your Name" required style="margin-bottom: 15px;">
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="Your Email" required style="margin-bottom: 15px;">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" name="message" rows="3" placeholder="Your Message" required style="margin-bottom: 15px;"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
 
 
             

@@ -159,7 +159,7 @@ if (!isset($_SESSION["username"])) {
     }
 
     // SQL query to retrieve data from the task_event table
-    $sql = "SELECT task_id, event_id, task_description, status, name FROM task_event";
+    $sql = "SELECT task_id, event_id, task_description, name FROM task_event";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -169,7 +169,6 @@ if (!isset($_SESSION["username"])) {
         echo '<th scope="col">Task ID</th>';
         echo '<th scope="col">Event ID</th>';
         echo '<th scope="col">Task Description</th>';
-        echo '<th scope="col">Status</th>';
         echo '<th scope="col">Name</th>';
         echo '</tr>';
         echo '</thead>';
@@ -180,7 +179,6 @@ if (!isset($_SESSION["username"])) {
             echo '<td>' . $row['task_id'] . '</td>';
             echo '<td>' . $row['event_id'] . '</td>';
             echo '<td>' . $row['task_description'] . '</td>';
-            echo '<td>' . $row['status'] . '</td>';
             echo '<td>' . $row['name'] . '</td>';
             echo '</tr>';
         }
