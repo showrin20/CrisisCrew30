@@ -107,6 +107,7 @@ if (!isset($_SESSION["username"])) {
                   <a href="add_event.php" class="btn btn-primary mb-3">Add Event</a>
                   <div class="table-responsive">
                   <?php
+
 // Database connection settings
 $servername = "localhost";
 $dbUsername = "sowadrahman";
@@ -120,6 +121,9 @@ $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+// Initialize a variable to store the event location
+$eventLocation = "";
 
 // SQL query to retrieve data from the event table
 $sql = "SELECT event_id, name, description, location, date FROM event";
@@ -139,11 +143,14 @@ if ($result->num_rows > 0) {
     echo '<tbody>';
 
     while ($row = $result->fetch_assoc()) {
+        // Store the event location in the variable
+        $eventLocation = $row['location'];
+
         echo '<tr>';
         echo '<td>' . $row['event_id'] . '</td>';
         echo '<td>' . $row['name'] . '</td>';
         echo '<td>' . $row['description'] . '</td>';
-        echo '<td>' . $row['location'] . '</td>';
+        echo '<td>' . $eventLocation . '</td>';
         echo '<td>' . $row['date'] . '</td>';
         echo '</tr>';
     }
@@ -154,103 +161,59 @@ if ($result->num_rows > 0) {
     echo "No records found";
 }
 
+// Query volunteers based on the event location
+if (!empty($eventLocation)) {
+    $sql = "SELECT firstName, lastName, email, contact FROM volunteers WHERE location = ?";
+    $stmt = $conn->prepare($sql);
+    
+    if ($stmt === false) {
+        die("Error preparing statement: " . $conn->error);
+    }
+    
+    // Bind the event location as a parameter
+    $stmt->bind_param("s", $eventLocation);
+    
+    // Execute the query
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            echo '<h2>Volunteers in Event Location: ' . $eventLocation . '</h2>';
+            echo '<table class="table table-striped">';
+            echo '<thead class="thead-dark">';
+            echo '<tr>';
+            echo '<th scope="col">First Name</th>';
+            echo '<th scope="col">Last Name</th>';
+            echo '<th scope="col">Email</th>';
+            echo '<th scope="col">Contact</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+            
+            while ($volunteer = $result->fetch_assoc()) {
+                echo '<tr>';
+                echo '<td>' . $volunteer['firstName'] . '</td>';
+                echo '<td>' . $volunteer['lastName'] . '</td>';
+                echo '<td>' . $volunteer['email'] . '</td>';
+                echo '<td>' . $volunteer['contact'] . '</td>';
+                echo '</tr>';
+            }            
+            echo '</tbody>';
+            echo '</table>';
+        } else {
+            echo "No volunteers found in the event location.";
+        }
+    } else {
+        echo "Error executing query: " . $stmt->error;
+    }
+    
+    $stmt->close();
+}
+
 // Close the database connection
 $conn->close();
 ?>
 
-                  </div>
-
-                  <h3 class="text-center mb-4">Volunteer List</h3>
-                  <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <thead class="thead-dark">
-                        <tr>
-                          <th>Name</th>
-                          <th>Skills</th>
-                          <th>Location</th>
-                          <th>Event</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          class="filterable-row"
-                          data-skills="Skill 1"
-                          data-location="Location 1"
-                          data-event="Event 1"
-                        >
-                          <td>Volunteer 1</td>
-                          <td>Skill 1</td>
-                          <td>Location 1</td>
-                          <td>Event 1</td>
-                          <td>
-                            <button
-                              class="btn btn-success"
-                              onclick="sendInvite(this)"
-                            >
-                              Send Invite
-                            </button>
-                            <button
-                              class="btn btn-danger"
-                              onclick="deleteVolunteer(this)"
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                        <tr
-                          class="filterable-row"
-                          data-skills="Skill 2"
-                          data-location="Location 2"
-                          data-event="Event 2"
-                        >
-                          <td>Volunteer 2</td>
-                          <td>Skill 2</td>
-                          <td>Location 2</td>
-                          <td>Event 2</td>
-                          <td>
-                            <button
-                              class="btn btn-success"
-                              onclick="sendInvite(this)"
-                            >
-                              Send Invite
-                            </button>
-                            <button
-                              class="btn btn-danger"
-                              onclick="deleteVolunteer(this)"
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                        <tr
-                          class="filterable-row"
-                          data-skills="Skill 3"
-                          data-location="Location 1"
-                          data-event="Event 3"
-                        >
-                          <td>Volunteer 3</td>
-                          <td>Skill 3</td>
-                          <td>Location 1</td>
-                          <td>Event 3</td>
-                          <td>
-                            <button
-                              class="btn btn-success"
-                              onclick="sendInvite(this)"
-                            >
-                              Send Invite
-                            </button>
-                            <button
-                              class="btn btn-danger"
-                              onclick="deleteVolunteer(this)"
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                        <!-- Add more rows for additional volunteers and events -->
-                      </tbody>
-                    </table>
                   </div>
                 </div>
 
@@ -259,50 +222,8 @@ $conn->close();
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-                <script>
-                  // JavaScript function to filter the table based on selected skills and location
-                  function filterTable() {
-                    var skillsFilter =
-                      document.getElementById("filterSkills").value;
-                    var locationFilter =
-                      document.getElementById("filterLocation").value;
-
-                    var rows =
-                      document.getElementsByClassName("filterable-row");
-
-                    for (var i = 0; i < rows.length; i++) {
-                      var skills = rows[i].getAttribute("data-skills");
-                      var location = rows[i].getAttribute("data-location");
-
-                      var showRow =
-                        (skillsFilter === "All" || skills === skillsFilter) &&
-                        (locationFilter === "All" ||
-                          location === locationFilter);
-
-                      rows[i].style.display = showRow ? "" : "none";
-                    }
-                  }
-
-                  // JavaScript function for sending invite
-                  function sendInvite(button) {
-                    // Add your logic for sending invite here
-                    alert("Invite sent!");
-                  }
-
-                  // JavaScript function for deleting volunteer
-                  function deleteVolunteer(button) {
-                    // Add your logic for deleting volunteer here
-                    alert("Volunteer deleted!");
-                  }
-
-                  // Attach the filterTable function to the change event of the filter dropdowns
-                  document
-                    .getElementById("filterSkills")
-                    .addEventListener("change", filterTable);
-                  document
-                    .getElementById("filterLocation")
-                    .addEventListener("change", filterTable);
-                </script>
+            
+                 
               
           </div>
         </div>

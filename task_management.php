@@ -143,55 +143,127 @@ if (!isset($_SESSION["username"])) {
                 <a href="add_task.php" class="btn btn-primary mb-3">Add Tasks for Event</a>
 
                 <div class="table-responsive">
-    <?php
-    // Database connection settings
-    $servername = "localhost";
-    $dbUsername = "sowadrahman";
-    $dbPassword = "kikhobor";
-    $dbname = "crisiscrew20"; // Change to the "event" database
+<?php
+// Database connection settings
+$servername = "localhost";
+$dbUsername = "sowadrahman";
+$dbPassword = "kikhobor";
+$dbname = "crisiscrew20"; // Change to the "event" database
 
-    // Create a connection to the database
-    $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+// Create a connection to the database
+$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
 
-    // Check the connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve all events
+$sqlEvents = "SELECT event_id, name, description, location, date FROM event";
+$resultEvents = $conn->query($sqlEvents);
+
+if ($resultEvents === false) {
+    die("Error executing events query: " . $conn->error);
+}
+
+// Get the current date
+$currentDate = date("Y-m-d");
+
+echo '<h2>Events</h2>';
+
+if ($resultEvents->num_rows > 0) {
+    echo '<table class="table table-striped">';
+    echo '<thead class="thead-dark">';
+    echo '<tr>';
+    echo '<th scope="col">Event ID</th>';
+    echo '<th scope="col">Event Name</th>';
+    echo '<th scope="col">Event Description</th>';
+    echo '<th scope="col">Event Location</th>';
+    echo '<th scope="col">Event Date</th>';
+    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
+
+    while ($event = $resultEvents->fetch_assoc()) {
+        // Filter events that are not in the past
+        if ($event['date'] >= $currentDate) {
+            echo '<tr>';
+            echo '<td>' . $event['event_id'] . '</td>';
+            echo '<td>' . $event['name'] . '</td>';
+            echo '<td>' . $event['description'] . '</td>';
+            echo '<td>' . $event['location'] . '</td>';
+            echo '<td>' . $event['date'] . '</td>';
+            echo '</tr>';
+        }
     }
 
-    // SQL query to retrieve data from the task_event table
-    $sql = "SELECT task_id, event_id, task_description, name FROM task_event";
-    $result = $conn->query($sql);
+    echo '</tbody>';
+    echo '</table>';
+} else {
+    echo "No events found.";
+}
 
-    if ($result->num_rows > 0) {
-        echo '<table class="table table-striped table-bordered">';
+// Close the result set for events
+$resultEvents->close();
+
+// Retrieve volunteers for the current day's event
+$sqlVolunteers = "SELECT v.firstName, v.lastName, v.email, v.contact, v.skills, e.date, e.event_id 
+                  FROM volunteers v 
+                  JOIN event_volunteer ev ON v.id = ev.volunteer_id 
+                  JOIN event e ON ev.event_id = e.event_id 
+                  WHERE DATE(e.date) = ?";
+$stmtVolunteers = $conn->prepare($sqlVolunteers);
+
+if ($stmtVolunteers === false) {
+    die("Error preparing volunteers statement: " . $conn->error);
+}
+
+$stmtVolunteers->bind_param("s", $currentDate);
+
+if ($stmtVolunteers->execute()) {
+    $resultVolunteers = $stmtVolunteers->get_result();
+
+    if ($resultVolunteers->num_rows > 0) {
+        echo '<h2>Volunteers for the Current Day</h2>';
+        echo '<table class="table table-striped">';
         echo '<thead class="thead-dark">';
         echo '<tr>';
-        echo '<th scope="col">Task ID</th>';
+        echo '<th scope="col">First Name</th>';
+        echo '<th scope="col">Last Name</th>';
+        echo '<th scope="col">Email</th>';
+        echo '<th scope="col">Contact</th>';
+        echo '<th scope="col">Skills</th>';
+        echo '<th scope="col">Event Date</th>';
         echo '<th scope="col">Event ID</th>';
-        echo '<th scope="col">Task Description</th>';
-        echo '<th scope="col">Name</th>';
         echo '</tr>';
         echo '</thead>';
         echo '<tbody>';
 
-        while ($row = $result->fetch_assoc()) {
+        while ($volunteer = $resultVolunteers->fetch_assoc()) {
             echo '<tr>';
-            echo '<td>' . $row['task_id'] . '</td>';
-            echo '<td>' . $row['event_id'] . '</td>';
-            echo '<td>' . $row['task_description'] . '</td>';
-            echo '<td>' . $row['name'] . '</td>';
+            echo '<td>' . $volunteer['firstName'] . '</td>';
+            echo '<td>' . $volunteer['lastName'] . '</td>';
+            echo '<td>' . $volunteer['email'] . '</td>';
+            echo '<td>' . $volunteer['contact'] . '</td>';
+            echo '<td>' . $volunteer['skills'] . '</td>';
+            echo '<td>' . $volunteer['date'] . '</td>';
+            echo '<td>' . $volunteer['event_id'] . '</td>';
             echo '</tr>';
         }
 
         echo '</tbody>';
         echo '</table>';
     } else {
-        echo "No records found";
+        echo "No volunteers found for the current day's event.";
     }
+} else {
+    echo "Error executing volunteers query: " . $stmtVolunteers->error;
+}
 
-    // Close the database connection
-    $conn->close();
-    ?>
+// Close the database connection
+$conn->close();
+?>
+
 </div>
 
               </div>

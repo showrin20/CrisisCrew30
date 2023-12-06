@@ -149,6 +149,8 @@ $servername = "localhost";
 $dbUsername = "sowadrahman";
 $dbPassword = "kikhobor";
 $dbname = "crisiscrew20"; 
+
+// Create a connection to the database
 $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
 
 // Check the connection
@@ -158,29 +160,27 @@ if ($conn->connect_error) {
 
 // Get today's date
 $today = date("Y-m-d");
+echo "Today's date  " ,  $today;
 
 // SQL query to retrieve today's events
-$sql = "SELECT event_id, name, description, location, date FROM event WHERE date = '$today'";
+$sql = "SELECT name, location, description FROM event WHERE DATE(date) = '$today'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo '<table class="table table-striped table-bordered">';
     echo '<thead class="thead-dark">';
     echo '<tr>';
-    echo '<th scope="col">No.</th>';
-    echo '<th scope="col">Location</th>';
-    echo '<th scope="col">Time</th>';
-    echo '<th scope="col">Details</th>';
+    echo '<th scope="col">Event Name</th>';
+    echo '<th scope="col">Event Location</th>';
+    echo '<th scope="col">Event Description</th>';
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
 
     while ($row = $result->fetch_assoc()) {
         echo '<tr>';
-        echo '<th scope="row">' . $row['event_id'] . '</th>';
+        echo '<td>' . $row['name'] . '</td>';
         echo '<td>' . $row['location'] . '</td>';
-        // You may need to adjust the time format based on your database schema
-        echo '<td>' . date("h:i A", strtotime($row['date'])) . '</td>';
         echo '<td>' . $row['description'] . '</td>';
         echo '</tr>';
     }
@@ -194,6 +194,8 @@ if ($result->num_rows > 0) {
 // Close the database connection
 $conn->close();
 ?>
+
+
 
 
 

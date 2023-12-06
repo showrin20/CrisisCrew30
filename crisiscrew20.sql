@@ -100,4 +100,5 @@ INSERT INTO `resource` (`task_id`, `name`, `description`) VALUES
 (2, 'Task 2', 'Communication Devices for coordination');
 -- Add more resources and tasks as needed
 
+
 COMMIT;
