@@ -144,38 +144,105 @@ if (!isset($_SESSION["username"])) {
   <div class="col-lg-8 col-md-8 col-12">
  
 <div class="container mt-4">
+
+
+
 <h5>Volunteer Search</h5>
-<form method="GET" action="search.php">
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <select name="searchOption" class="form-control">
-                <option value="location">Location</option>
-                <option value="bloodGroup">Blood Group</option>
-            </select>
+    <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <select name="searchOption" class="form-control">
+                    <option value="location">Location</option>
+                    <option value="bloodGroup">Blood Group</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="searchInput" class="form-control" placeholder="Search...">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" name="searchInput" class="form-control" placeholder="Search...">
-        </div>
-    </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
 
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
+    <h5>Volunteer Search Results</h5>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Blood Group</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Check if the form has been submitted and if searchOption and searchInput are set
+            if (isset($_GET["searchOption"]) && isset($_GET["searchInput"])) {
+                // Database connection settings
+                $servername = "localhost";
+                $dbUsername = "sowadrahman";
+                $dbPassword = "kikhobor";
+                $dbname = "crisiscrew20";
 
-<table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Location</th>
-                    <th>Blood Group</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
+                // Create a connection to the database
+                $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+
+                // Check the connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                // Get the search option and input from the form
+                $searchOption = $_GET["searchOption"];
+                $searchInput = $_GET["searchInput"];
+
+                // SQL query to retrieve data based on the selected search option and input
+                $sql = "SELECT id, CONCAT(firstName, ' ', lastName) AS Name, location, bloodGroup FROM volunteers";
+
+                if ($searchOption === "location") {
+                    $sql .= " WHERE location LIKE '%" . $searchInput . "%'";
+                } elseif ($searchOption === "bloodGroup") {
+                    $sql .= " WHERE bloodGroup LIKE '%" . $searchInput . "%'";
+                }
+
+                // Execute the SQL query
+                $result = $conn->query($sql);
+
+                if (!$result) {
+                    die("SQL Error: " . $conn->error);
+                }
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . $row['id'] . '</td>';
+                        echo '<td>' . $row['Name'] . '</td>';
+                        echo '<td>' . $row['location'] . '</td>';
+                        echo '<td>' . $row['bloodGroup'] . '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr>';
+                    echo '<td colspan="4">No volunteers found matching the search criteria.</td>';
+                    echo '</tr>';
+                }
+
+                // Close the database connection
+                $conn->close();
+            } else {
+                // Display a message when no search has been performed
+                echo '<tr>';
+                echo '<td colspan="4">No volunteer has been searched yet.</td>';
+                echo '</tr>';
+            }
+            ?>
+        </tbody>
+    </table>
 
 
+
+
+        </tbody>
+    </table>
 
 
 
@@ -250,7 +317,7 @@ $dbname = "crisiscrew20";
         }
 
         // SQL query to retrieve data from the volunteers table
-        $sql = "SELECT id, CONCAT(firstName, ' ', lastName) AS Name, gender, bloodGroup, location, email, contact FROM volunteers";
+        $sql = "SELECT id, CONCAT(firstName, ' ', lastName) AS Name, gender, bloodGroup, location, email, contact ,username FROM volunteers";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -259,6 +326,8 @@ $dbname = "crisiscrew20";
           echo '<tr>';
           echo '<th scope="col">ID</th>';
           echo '<th scope="col">Name</th>';
+          echo '<th scope="col">username</th>';
+
           echo '<th scope="col">Gender</th>';
           echo '<th scope="col">Blood Group</th>';
           echo '<th scope="col">Location</th>';
@@ -272,6 +341,8 @@ $dbname = "crisiscrew20";
               echo '<tr>';
               echo '<td>' . $row['id'] . '</td>';
               echo '<td>' . $row['Name'] . '</td>';
+              echo '<td>' . $row['username'] . '</td>';
+
               echo '<td>' . $row['gender'] . '</td>';
               echo '<td>' . $row['bloodGroup'] . '</td>';
               echo '<td>' . $row['location'] . '</td>';
