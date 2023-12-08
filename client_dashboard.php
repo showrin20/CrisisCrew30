@@ -103,69 +103,87 @@ if (!isset($_SESSION['username'])) {
                 <div class="container">
                     <h5 class="text-left mb-4">Client Notifications</h5>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <?php
-                            // Database connection settings
-                            $servername = "localhost";
-                            $dbUsername = "sowadrahman";
-                            $dbPassword = "kikhobor";
-                            $dbname = "crisiscrew20"; // Change to the appropriate database name
+                    <table class="table table-bordered table-hover">
+                        <?php
+ // Database connection settings
+ $servername = "localhost";
+ $dbUsername = "sowadrahman";
+ $dbPassword = "kikhobor";
+ $dbname = "crisiscrew20"; // Change to the appropriate database name
+ 
+ // Create a connection to the database
+ $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+ 
+ // Check the connection
+ if ($conn->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
+ }
+ 
+ $username = $_SESSION['username']; // Retrieve the username from session
+ 
+ // Step 1: Retrieve the volunteer's ID based on their username
+ $query = "SELECT id FROM volunteers WHERE username = ?";
+ if ($stmt = $conn->prepare($query)) {
+     $stmt->bind_param("s", $username);
+     $stmt->execute();
+     $result = $stmt->get_result();
+ 
+     if ($result->num_rows > 0) {
+         $row = $result->fetch_assoc();
+         $volunteerID = $row['id']; // Retrieve the volunteer ID
+     } else {
+         echo "No user found";
+         exit(); // Exit if no user is found
+     }
+     $stmt->close();
+ } else {
+     echo "Error preparing the SQL statement: " . $conn->error;
+     exit(); // Exit on error
+ }
+ 
+ // Step 2: Retrieve assignments for the volunteer using their ID
+ $query = "SELECT * FROM assignee WHERE id = ?";
+ if ($stmt = $conn->prepare($query)) {
+     $stmt->bind_param("i", $volunteerID); // Use the retrieved volunteer ID
+     $stmt->execute();
+     $result = $stmt->get_result();                        if ($result->num_rows > 0) {
+                            echo "<h5 class='mt-3'>Assignments for Volunteer ID $volunteerID :  $username  </h5>";
+                            echo "<thead class='thead-dark'>
+                                    <tr>
+                                        <th>Task ID</th>
+                                        <th>Resource ID</th>
+                                        <th>Message</th>
+                                    </tr>
+                                  </thead>";
+                            echo "<tbody>";
 
-                            // Create a connection to the database
-                            $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
-
-                            // Check the connection
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>
+                                        <td>{$row['task_id']}</td>
+                                        <td>{$row['resource_id']}</td>
+                                        <td>{$row['message']}</td>
+                                      </tr>";
                             }
+                            echo "</tbody>";
+                            echo "</table>";
+                        } else {
+                            echo "<p class='mt-3'>No assignments found for  $username .</p>";
+                        }
+                        $stmt->close();
+                      } else {
+                          echo "Error preparing the SQL statement: " . $conn->error;
+                      }
+                      
+                      
+                      
+                      
+                      // Close the database connection
+                      $conn->close();
+                      ?>                        
 
-                            // SQL query to retrieve assignee data for the volunteer based on their ID
-                            $sql = "SELECT task_id, resource_id, message FROM assignee WHERE id = ?";
-                            $stmt = $conn->prepare($sql);
 
-                            if ($stmt === false) {
-                                die("Error preparing statement: " . $conn->error);
-                            }
 
-                            // Bind the volunteer's ID as a parameter (replace $volunteerId with the actual volunteer ID)
-                            $volunteerId = 1; // Replace with the actual volunteer ID
-                            $stmt->bind_param("i", $volunteerId);
-
-                            // Execute the query
-                            if ($stmt->execute()) {
-                                $result = $stmt->get_result();
-
-                                if ($result->num_rows > 0) {
-                                    // Display the assignee data in an HTML table
-                                    echo '<thead class="thead-dark">';
-                                    echo '<tr>';
-                                    echo '<th>Task ID</th>';
-                                    echo '<th>Resource ID</th>';
-                                    echo '<th>Message</th>';
-                                    echo '</tr>';
-                                    echo '</thead>';
-                                    echo '<tbody>';
-
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo '<tr>';
-                                        echo '<td>' . $row['task_id'] . '</td>';
-                                        echo '<td>' . $row['resource_id'] . '</td>';
-                                        echo '<td>' . $row['message'] . '</td>';
-                                        echo '</tr>';
-                                    }
-
-                                    echo '</tbody>';
-                                } else {
-                                    echo "No assignee data found for this volunteer.";
-                                }
-                            } else {
-                                echo "Error executing query: " . $stmt->error;
-                            }
-
-                            $stmt->close();
-                            $conn->close();
-                            ?>
-                        </table>
+                    </table>
                     </div>
                 </div>
             </div>
@@ -236,3 +254,4 @@ if (!isset($_SESSION['username'])) {
     <script src="myscript.js"></script>
   </body>
 </html>
+                  

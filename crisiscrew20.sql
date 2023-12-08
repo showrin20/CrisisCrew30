@@ -77,10 +77,18 @@ CREATE TABLE `task_event` (
 );
 
 INSERT INTO `task_event` (`event_id`, `task_description`, `name`) VALUES
-(1, 'Prepare event materials', 'Task 1'),
-(2, 'Set up event venue', 'Task 2'),
-(2, 'Coordinate volunteers', 'Task 3'),
-(3, 'Finalize event logistics', 'Task 4');
+(1, 'Set up tables and chairs', 'Set up'),
+(1, 'Decorate the venue', 'Decorate'),
+(1, 'Serve food and drinks', 'Serve'),
+(2, 'Set up tables and chairs', 'Set up'),
+(2, 'Decorate the venue', 'Decorate'),
+(2, 'Serve food and drinks', 'Serve'),
+(3, 'Set up tables and chairs', 'Set up'),
+(3, 'Decorate the venue', 'Decorate'),
+(3, 'Serve food and drinks', 'Serve'),
+(4, 'Set up tables and chairs', 'Set up'),
+(4, 'Decorate the venue', 'Decorate'),
+(4, 'Serve food and drinks', 'Serve');
 
 CREATE TABLE `resource` (
     `resource_id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -145,7 +153,7 @@ VALUES (1, 1, 1, 'Please complete this task by the end of the day.');
 
 -- Assign volunteer with ID 2 to Task 2, Resource 2 with a message
 INSERT INTO assignee (task_id, resource_id, id, message)
-VALUES (2, 2, 2, 'This is an urgent task. Please prioritize.');
+VALUES (2, 2, 1, 'This is an urgent task. Please prioritize.');
 
 
 
