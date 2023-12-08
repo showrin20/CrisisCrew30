@@ -197,6 +197,22 @@ if (!isset($_SESSION["username"])) {
           Phone: +1 123-456-7890
         </p>
         <!-- Edit Button -->
+        <div class="container mt-4">
+          <h5>Image Upload</h5>
+
+          <?php if (isset($_GET['upload_error'])): ?>
+            <p style="color: red;"><?php echo $_GET['upload_error']; ?></p>
+          <?php endif ?>
+
+          <form action="upload.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="my_image">
+            <input type="submit" name="submit" value="Upload">
+          </form>
+        </div>
+
+
+
+        
         <button
           type="button"
           class="btn btn-primary"
@@ -282,5 +298,6 @@ $dbname = "crisiscrew20";
 <!-- Bootstrap JS and Custom Script -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="myscript.js"></script>
+<!-- ... (Previous HTML code for admin_dashboard.php) ... -->
 </body>
 </html>
