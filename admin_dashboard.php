@@ -144,36 +144,47 @@ if (!isset($_SESSION["username"])) {
   <div class="col-lg-8 col-md-8 col-12">
  
 <div class="container mt-4">
-<h5>User Search</h5>
+<h5>Volunteer Search</h5>
+<form method="GET" action="search.php">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <select name="searchOption" class="form-control">
+                <option value="location">Location</option>
+                <option value="bloodGroup">Blood Group</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <input type="text" name="searchInput" class="form-control" placeholder="Search...">
+        </div>
+    </div>
 
-<div class="row mb-3">
-    <div class="col-md-6">
-        <select id="searchOption" class="form-control">
-            <option value="location">Location</option>
-            <option value="age">Age</option>
-            <option value="bloodGroup">Blood Group</option>
-        </select>
-    </div>
-    <div class="col-md-6">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search...">
-    </div>
-</div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
 
 <table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Age</th>
-            <th>Blood Group</th>
-        </tr>
-    </thead>
-    <tbody id="userTableBody">
-        <!-- Table rows will be added here -->
-    </tbody>
-</table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Blood Group</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
 </div>
+
+
 
 
 
@@ -183,21 +194,20 @@ if (!isset($_SESSION["username"])) {
   <div class="col-lg-4 col-md-4 col-12">
     <div class="row">
       <div class="col-lg-4 col-md-4 col-12">
-        <img
+        <!-- <img
           src="images/ceo.jpg"
           alt="Admin Avatar"
           class="img-fluid badge-img rounded-circle"
-        />
+        /> -->
       </div>
       <div class="col-lg-8 col-md-8 col-12">
         <h5 style="color: #343a40"><?php echo htmlspecialchars($_SESSION['username']); ?></h5>
         <p style="color: #6c757d">
           Role: admin<br />
-          Email:jawad@example.com<br />
-          Phone: +1 123-456-7890
+   
         </p>
         <!-- Edit Button -->
-        <div class="container mt-4">
+        <!-- <div class="container mt-4">
           <h5>Image Upload</h5>
 
           <?php if (isset($_GET['upload_error'])): ?>
@@ -208,19 +218,12 @@ if (!isset($_SESSION["username"])) {
             <input type="file" name="my_image">
             <input type="submit" name="submit" value="Upload">
           </form>
-        </div>
+        </div> -->
 
 
 
         
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#editAdminModal"
-        >
-          Edit
-        </button>
+    
       </div>
     </div>
   </div>

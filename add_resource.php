@@ -40,7 +40,7 @@ if (!isset($_SESSION["username"])) {
     }
 
     .sidebar {
-        background-color: #1f1c3b; /* Dark background color for the sidebar */
+        background-color:  #343a40; /* Dark background color for the sidebar */
         color: #dee2e6; /* Light text color for the sidebar */
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow for the sidebar */
     }
@@ -139,43 +139,32 @@ if (!isset($_SESSION["username"])) {
               Gateway to Meaningful Impact.
             </p>
             <div class="container mt-4">
-    <h5>Add Task </h5>
-    <form method="POST" action="add_task_process.php" enctype="multipart/form-data">
-        <div class="form-row">
-            <!-- Event ID -->
-            <div class="form-group col-md-6">
-                <label for="event_id" style="color: #676a6a">Event ID</label>
-                <input type="number" class="form-control" id="event_id" name="event_id" placeholder="Enter Event ID" required />
-            </div>
-<!-- Task Name -->
-<div class="form-group col-md-6">
-                <label for="name" style="color: #676a6a">Task Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Task Name" required />
-            </div>
-            <!-- Task Description -->
-            <div class="form-group col-md-6">
-                <label for="task_description" style="color: #676a6a">Task Description</label>
-                <textarea class="form-control" id="task_description" name="task_description" placeholder="Enter Task Description" required></textarea>
-            </div>
-
-            <!-- Task Status -->
-            <div class="form-group col-md-6">
-                <label for="status" style="color: #676a6a">Task Status</label>
-                <select class="form-control" id="status" name="status" required>
-                    <option value="done">Assigned</option>
-                  
-                    <option value="not_assigned">Not Assigned</option>
-                </select>
-            </div>
-
-            
+    <h5>Add Resource </h5>
+    <form method="POST" action="add_resource_process.php" enctype="multipart/form-data">
+    <div class="form-row">
+        <!-- Resource Name -->
+        <div class="form-group col-md-6">
+            <label for="resource_name" style="color: #676a6a">Resource Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Resource Name" required />
         </div>
-
-        <!-- Action Button -->
-        <div class="form-group col-md-12">
-            <button type="submit" class="btn btn-primary btn-block">Add Task Event</button>
+        <!-- Resource Description -->
+        <div class="form-group col-md-6">
+            <label for="resource_description" style="color: #676a6a">Resource Description</label>
+            <textarea class="form-control" id="description" name="description" placeholder="Enter Resource Description" required></textarea>
         </div>
-    </form>
+        <!-- Task ID (Foreign Key) -->
+        <div class="form-group col-md-6">
+            <label for="task_id" style="color: #676a6a">Task ID </label>
+            <input type="number" class="form-control" id="task_id" name="task_id" placeholder="Enter Task ID" required />
+        </div>
+    </div>
+
+    <!-- Action Button -->
+    <div class="form-group col-md-12">
+        <button type="submit" class="btn btn-primary btn-block">Add Resource</button>
+    </div>
+</form>
+
 </div>
 
 

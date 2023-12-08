@@ -77,135 +77,158 @@ if (!isset($_SESSION['username'])) {
               <div class="col-lg-4 col-md-4 col-12">
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-12">
-                    <img
+                    <!-- <img
                       src="images/cto.jpg"
                       alt="Admin Avatar"
                       class="img-fluid badge-img rounded-circle"
-                    />
+                    /> -->
                   </div>
                   <div class="col-lg-8 col-md-8 col-12">
                     <h5 style="color: #343a40"><?php echo htmlspecialchars($_SESSION['username']); ?></h5>
                     <p style="color: #6c757d">
                       Role: Volunteer<br />
-                      Email:showrin@example.com<br />
-                      Phone: +1 123-456-7890
+                    
                     </p>
                     <!-- Edit Button -->
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      data-toggle="modal"
-                      data-target="#editAdminModal"
-                    >
-                      Edit
-                    </button>
+                               <a href="update_volunteer.php" class="btn btn-primary">Edit Profile</a>
+
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Training Badge and Fire Incidents Table -->
             <div class="row" style="padding: 30px">
-              <div class="col-lg-6 col-md-6 col-12">
+            <!-- First Row: Client Notifications -->
+            <div class="col-lg-6 col-md-6 col-12">
                 <div class="container">
-                  <h5 class="text-left mb-4">Client Notifications</h5>
-                  <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <thead class="thead-dark">
-                        <tr>
-                          <th>Date</th>
-                          <th>Notification</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Today</td>
-                          <td>No Notification</td>
-                          <td></td>
-                        </tr>
-                        <!-- Example notification row with buttons -->
-                        <tr>
-                          <td>2023-01-01</td>
-                          <td>You have a new task assigned.</td>
-                          <td>
-                            <button class="btn btn-success btn-sm" style="margin: 2px; width: 60px;">Accept</button>
-                            <button class="btn btn-danger btn-sm" style="margin: 2px; width: 60px;">Delete</button> </td>
-                          </td>
-                        </tr>
-                        <!-- Add more rows for additional notifications -->
-                      </tbody>
-                    </table>
-                  </div>
+                    <h5 class="text-left mb-4">Client Notifications</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <?php
+                            // Database connection settings
+                            $servername = "localhost";
+                            $dbUsername = "sowadrahman";
+                            $dbPassword = "kikhobor";
+                            $dbname = "crisiscrew20"; // Change to the appropriate database name
+
+                            // Create a connection to the database
+                            $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+
+                            // Check the connection
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+
+                            // SQL query to retrieve assignee data for the volunteer based on their ID
+                            $sql = "SELECT task_id, resource_id, message FROM assignee WHERE id = ?";
+                            $stmt = $conn->prepare($sql);
+
+                            if ($stmt === false) {
+                                die("Error preparing statement: " . $conn->error);
+                            }
+
+                            // Bind the volunteer's ID as a parameter (replace $volunteerId with the actual volunteer ID)
+                            $volunteerId = 1; // Replace with the actual volunteer ID
+                            $stmt->bind_param("i", $volunteerId);
+
+                            // Execute the query
+                            if ($stmt->execute()) {
+                                $result = $stmt->get_result();
+
+                                if ($result->num_rows > 0) {
+                                    // Display the assignee data in an HTML table
+                                    echo '<thead class="thead-dark">';
+                                    echo '<tr>';
+                                    echo '<th>Task ID</th>';
+                                    echo '<th>Resource ID</th>';
+                                    echo '<th>Message</th>';
+                                    echo '</tr>';
+                                    echo '</thead>';
+                                    echo '<tbody>';
+
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<tr>';
+                                        echo '<td>' . $row['task_id'] . '</td>';
+                                        echo '<td>' . $row['resource_id'] . '</td>';
+                                        echo '<td>' . $row['message'] . '</td>';
+                                        echo '</tr>';
+                                    }
+
+                                    echo '</tbody>';
+                                } else {
+                                    echo "No assignee data found for this volunteer.";
+                                }
+                            } else {
+                                echo "Error executing query: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            ?>
+                        </table>
+                    </div>
                 </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="table-container">
-                  <h5 class="mb-4">Today's Fire Incidents</h5>
-                  <?php
-// Database connection settings
-$servername = "localhost";
-$dbUsername = "sowadrahman";
-$dbPassword = "kikhobor";
-$dbname = "crisiscrew20"; 
-
-// Create a connection to the database
-$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
-
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Get today's date
-$today = date("Y-m-d");
-echo "Today's date  " ,  $today;
-
-// SQL query to retrieve today's events
-$sql = "SELECT name, location, description FROM event WHERE DATE(date) = '$today'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    echo '<table class="table table-striped table-bordered">';
-    echo '<thead class="thead-dark">';
-    echo '<tr>';
-    echo '<th scope="col">Event Name</th>';
-    echo '<th scope="col">Event Location</th>';
-    echo '<th scope="col">Event Description</th>';
-    echo '</tr>';
-    echo '</thead>';
-    echo '<tbody>';
-
-    while ($row = $result->fetch_assoc()) {
-        echo '<tr>';
-        echo '<td>' . $row['name'] . '</td>';
-        echo '<td>' . $row['location'] . '</td>';
-        echo '<td>' . $row['description'] . '</td>';
-        echo '</tr>';
-    }
-
-    echo '</tbody>';
-    echo '</table>';
-} else {
-    echo "No event today";
-}
-
-// Close the database connection
-$conn->close();
-?>
-
-
-
-
-
-
-                </div>
-              </div>
             </div>
-          </div>
+
+            <!-- Second Row: Today's Fire Incidents -->
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="table-container">
+                    <h5 class="mb-4">Today's Fire Incidents</h5>
+                    <?php
+                    // Database connection settings
+                    $servername = "localhost";
+                    $dbUsername = "sowadrahman";
+                    $dbPassword = "kikhobor";
+                    $dbname = "crisiscrew20"; 
+
+                    // Create a connection to the database
+                    $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+
+                    // Check the connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    // Get today's date
+                    $today = date("Y-m-d");
+                    echo "Today's date  " ,  $today;
+                    echo "<br>";
+
+                    // SQL query to retrieve today's events
+                    $sql = "SELECT name, location, description FROM event WHERE DATE(date) = '$today'";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        echo '<table class="table table-striped table-bordered">';
+                        echo '<thead class="thead-dark">';
+                        echo '<tr>';
+                        echo '<th scope="col">Event Name</th>';
+                        echo '<th scope="col">Event Location</th>';
+                        echo '<th scope="col">Event Description</th>';
+                        echo '</tr>';
+                        echo '</thead>';
+                        echo '<tbody>';
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<tr>';
+                            echo '<td>' . $row['name'] . '</td>';
+                            echo '<td>' . $row['location'] . '</td>';
+                            echo '<td>' . $row['description'] . '</td>';
+                            echo '</tr>';
+                        }
+
+                        echo '</tbody>';
+                        echo '</table>';
+                    } else {
+                        echo "No event today";
+                    }
+
+                    // Close the database connection
+                    $conn->close();
+                    ?>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Bootstrap JS and Custom Script -->

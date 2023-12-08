@@ -40,7 +40,7 @@ if (!isset($_SESSION["username"])) {
     }
 
     .sidebar {
-        background-color: #1f1c3b; /* Dark background color for the sidebar */
+        background-color:  #343a40; /* Dark background color for the sidebar */
         color: #dee2e6; /* Light text color for the sidebar */
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow for the sidebar */
     }
@@ -140,192 +140,81 @@ if (!isset($_SESSION["username"])) {
             </p>
        
                 <div class="container">
-                  <h2 class="text-center mb-4">Resource Management Table</h2>
-                  <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <thead class="thead-dark">
-                        <tr>
-                          <th>Name</th>
-                          <th>Description</th>
-                          <th>Type</th>
-                          <th>Location</th>
-                          <th>Status</th>
-                          <th>Assigned To</th>
-                          <th>Counter</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Resource 1</td>
-                          <td>Description 1</td>
-                          <td>
-                            <select class="form-control">
-                              <option>Tool</option>
-                              <option>Equipment</option>
-                              <option>Material</option>
-                              <!-- Add more types as needed -->
-                            </select>
-                          </td>
-                          <td>Location 1</td>
-                          <td class="status">Available</td>
-                          <td>
-                            <div class="form-check">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                id="task1_assignee1"
-                                onchange="updateCounterAndStatus(this)"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="task1_assignee1"
-                                >TaskAssignee1</label
-                              >
-                            </div>
-                            <div class="form-check">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                id="task1_assignee2"
-                                onchange="updateCounterAndStatus(this)"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="task1_assignee2"
-                                >TaskAssignee2</label
-                              >
-                            </div>
-                          </td>
-                          <td class="counter">2</td>
-                        </tr>
-                        <tr>
-                          <td>Resource 2</td>
-                          <td>Description 2</td>
-                          <td>
-                            <select class="form-control">
-                              <option>Tool</option>
-                              <option>Equipment</option>
-                              <option>Material</option>
-                              <!-- Add more types as needed -->
-                            </select>
-                          </td>
-                          <td>Location 2</td>
-                          <td class="status">Available</td>
-                          <td>
-                            <div class="form-check">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                id="task2_assignee3"
-                                onchange="updateCounterAndStatus(this)"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="task2_assignee3"
-                                >TaskAssignee3</label
-                              >
-                            </div>
-                            <div class="form-check">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                id="task2_assignee4"
-                                onchange="updateCounterAndStatus(this)"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="task2_assignee4"
-                                >TaskAssignee4</label
-                              >
-                            </div>
-                          </td>
-                          <td class="counter">2</td>
-                        </tr>
-                        <tr>
-                          <td>Resource 3</td>
-                          <td>Description 3</td>
-                          <td>
-                            <select class="form-control">
-                              <option>Tool</option>
-                              <option>Equipment</option>
-                              <option>Material</option>
-                              <!-- Add more types as needed -->
-                            </select>
-                          </td>
-                          <td>Location 3</td>
-                          <td class="status">Available</td>
-                          <td>
-                            <div class="form-check">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                id="task3_assignee2"
-                                onchange="updateCounterAndStatus(this)"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="task3_assignee2"
-                                >TaskAssignee2</label
-                              >
-                            </div>
-                            <div class="form-check">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                id="task3_assignee5"
-                                onchange="updateCounterAndStatus(this)"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="task3_assignee5"
-                                >TaskAssignee5</label
-                              >
-                            </div>
-                          </td>
-                          <td class="counter">2</td>
-                        </tr>
-                        <!-- Add more rows as needed -->
-                      </tbody>
-                    </table>
-                  </div>
+        <table class="table">
+     
+            <tbody>
+            <div class="table-responsive">
+                <a href="add_resource.php" class="btn btn-primary mb-3">Add resources for Task</a>
+    <?php
+    // Database connection settings
+    $servername = "localhost";
+    $dbUsername = "sowadrahman";
+    $dbPassword = "kikhobor";
+    $dbname = "crisiscrew20"; // Change to the appropriate database name
+
+    // Create a connection to the database
+    $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+
+    // Check the connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Retrieve resources from the database
+    $sql = "SELECT resource_id,  task_id,name, description FROM resource";
+    $result = $conn->query($sql);
+
+    if ($result === false) {
+        // Query failed, display error message
+        echo "Error executing the query: " . $conn->error;
+    } else {
+        // Query successful, display the table
+        if ($result->num_rows > 0) {
+            echo '<h5>Resource Table</h5>';
+            echo '<div class="table-responsive">';
+            echo '<table class="table table-striped">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Resource ID</th>';
+            echo '<th>Resource Name</th>';
+            echo '<th>Resource Description</th>';
+            echo '<th>Task ID</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+
+            while ($row = $result->fetch_assoc()) {
+                echo '<tr>';
+                echo '<td>' . $row['resource_id'] . '</td>';
+                echo '<td>' . $row['name'] . '</td>';
+                echo '<td>' . $row['description'] . '</td>';
+                echo '<td>' . $row['task_id'] . '</td>';
+                echo '</tr>';
+            }
+
+            echo '</tbody>';
+            echo '</table>';
+            echo '</div>';
+        } else {
+            echo '<p>No resources found.</p>';
+        }
+    }
+
+    // Close the database connection
+    $conn->close();
+    ?>
+</div>
+
+
                 </div>
 
-                <!-- Bootstrap JS and Popper.js (optional) -->
                 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-                <script>
-                  // JavaScript function to update the counter and status
-                  function updateCounterAndStatus(checkbox) {
-                    // Find the corresponding counter and status elements
-                    var counterElement = checkbox
-                      .closest("tr")
-                      .querySelector(".counter");
-                    var statusElement = checkbox
-                      .closest("tr")
-                      .querySelector(".status");
-
-                    // Update the counter value based on the checkbox state
-                    if (checkbox.checked) {
-                      counterElement.textContent =
-                        parseInt(counterElement.textContent) - 1;
-                    } else {
-                      counterElement.textContent =
-                        parseInt(counterElement.textContent) + 1;
-                    }
-
-                    // Update the status based on the counter value
-                    statusElement.textContent =
-                      parseInt(counterElement.textContent) === 0
-                        ? "Not Available"
-                        : "Available";
-                  }
-                </script>
-
-                <!-- Bootstrap JS and Custom Script -->
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-                <script src="myscript.js"></script>
+              
+           
+              
               </body>
             </html>
           </div>

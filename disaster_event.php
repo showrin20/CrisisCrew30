@@ -150,7 +150,7 @@ if ($result->num_rows > 0) {
         echo '<td>' . $row['event_id'] . '</td>';
         echo '<td>' . $row['name'] . '</td>';
         echo '<td>' . $row['description'] . '</td>';
-        echo '<td>' . $eventLocation . '</td>';
+        echo '<td>' . $row['location'] . '</td>';
         echo '<td>' . $row['date'] . '</td>';
         echo '</tr>';
     }
@@ -162,57 +162,163 @@ if ($result->num_rows > 0) {
 }
 
 // Query volunteers based on the event location
+// Query volunteers based on the event location
 if (!empty($eventLocation)) {
-    $sql = "SELECT firstName, lastName, email, contact FROM volunteers WHERE location = ?";
-    $stmt = $conn->prepare($sql);
-    
-    if ($stmt === false) {
-        die("Error preparing statement: " . $conn->error);
-    }
-    
-    // Bind the event location as a parameter
-    $stmt->bind_param("s", $eventLocation);
-    
-    // Execute the query
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0) {
-            echo '<h2>Volunteers in Event Location: ' . $eventLocation . '</h2>';
-            echo '<table class="table table-striped">';
-            echo '<thead class="thead-dark">';
-            echo '<tr>';
-            echo '<th scope="col">First Name</th>';
-            echo '<th scope="col">Last Name</th>';
-            echo '<th scope="col">Email</th>';
-            echo '<th scope="col">Contact</th>';
-            echo '</tr>';
-            echo '</thead>';
-            echo '<tbody>';
-            
-            while ($volunteer = $result->fetch_assoc()) {
-                echo '<tr>';
-                echo '<td>' . $volunteer['firstName'] . '</td>';
-                echo '<td>' . $volunteer['lastName'] . '</td>';
-                echo '<td>' . $volunteer['email'] . '</td>';
-                echo '<td>' . $volunteer['contact'] . '</td>';
-                echo '</tr>';
-            }            
-            echo '</tbody>';
-            echo '</table>';
-        } else {
-            echo "No volunteers found in the event location.";
-        }
-    } else {
-        echo "Error executing query: " . $stmt->error;
-    }
-    
-    $stmt->close();
+  $sql = "SELECT id, firstName, lastName, email, contact FROM volunteers WHERE location = ?";
+  $stmt = $conn->prepare($sql);
+  
+  if ($stmt === false) {
+      die("Error preparing statement: " . $conn->error);
+  }
+  
+  // Bind the event location as a parameter
+  $stmt->bind_param("s", $eventLocation);
+  
+  // Execute the query
+  if ($stmt->execute()) {
+      $result = $stmt->get_result();
+      
+      if ($result->num_rows > 0) {
+          echo '<h2>Volunteers in Event Location: ' . $eventLocation . '</h2>';
+          echo '<table class="table table-striped">';
+          echo '<thead class="thead-dark">';
+          echo '<tr>';
+          echo '<th scope="col">ID</th>';
+          echo '<th scope="col">First Name</th>';
+          echo '<th scope="col">Last Name</th>';
+          echo '<th scope="col">Email</th>';
+          echo '<th scope="col">Contact</th>';
+          echo '</tr>';
+          echo '</thead>';
+          echo '<tbody>';
+          
+          while ($volunteer = $result->fetch_assoc()) {
+              echo '<tr>';
+              echo '<td>' . $volunteer['id'] . '</td>';
+              echo '<td>' . $volunteer['firstName'] . '</td>';
+              echo '<td>' . $volunteer['lastName'] . '</td>';
+              echo '<td>' . $volunteer['email'] . '</td>';
+              echo '<td>' . $volunteer['contact'] . '</td>';
+              echo '</tr>';
+          }            
+          echo '</tbody>';
+          echo '</table>';
+      } else {
+          echo "No volunteers found in the event location.";
+      }
+  } else {
+      echo "Error executing query: " . $stmt->error;
+  }
+  
+  $stmt->close();
 }
+
+
+
+
+
+if (!empty($eventLocation)) {
+  // Select volunteers in the specified event location
+  $sql = "SELECT id, firstName, lastName FROM volunteers WHERE location = ?";
+  
+  $stmt = $conn->prepare($sql);
+  
+  if ($stmt === false) {
+      die("Error preparing statement: " . $conn->error);
+  }
+  
+  // Bind the event location as a parameter
+  $stmt->bind_param("s", $eventLocation);
+  
+  // Execute the query
+  if ($stmt->execute()) {
+      $result = $stmt->get_result();
+      
+      if ($result->num_rows > 0) {
+          echo '<h2>Volunteers in Event Location: ' . $eventLocation . '</h2>';
+          
+          // Create the assignee form
+          echo '<form method="POST" action="assigne_process.php">';
+          
+          // Dropdown list (select element) for volunteers
+          echo '<div class="form-group">';
+          echo '<label for="id">Select Volunteer:</label>';
+          echo '<select class="form-control" name="id" id="id" required>';
+          
+          while ($row = $result->fetch_assoc()) {
+              // Populate the dropdown options with volunteer names and IDs
+              echo '<option value="' . $row['id'] . '">' . $row['firstName'] . ' ' . $row['lastName'] . '</option>';
+          }
+          echo '</select>';
+          echo '</div>';
+          
+          // Dropdown list for tasks
+          echo '<div class="form-group">';
+          echo '<label for="task_id">Select Task:</label>';
+          echo '<select class="form-control" name="task_id" id="task_id" required>';
+          
+          $sql = "SELECT task_id, name FROM task_event";
+          $result = $conn->query($sql);
+          
+          if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                  // Populate the dropdown options with task names and IDs
+                  echo '<option value="' . $row['task_id'] . '">' . $row['name'] . '</option>';
+              }
+          }
+          
+          echo '</select>';
+          echo '</div>';
+          
+          // Dropdown list for resources
+          echo '<div class="form-group">';
+          echo '<label for="resource_id">Select Resource:</label>';
+          echo '<select class="form-control" name="resource_id" id="resource_id" required>';
+          
+          $sql = "SELECT resource_id, name FROM resource";
+          $result = $conn->query($sql);
+          
+          if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                  // Populate the dropdown options with resource names and IDs
+                  echo '<option value="' . $row['resource_id'] . '">' . $row['name'] . '</option>';
+              }
+          }
+          
+          echo '</select>';
+          echo '</div>';
+          
+          // Message field
+          echo '<div class="form-group">';
+          echo '<label for="message">Message for Tasks using this Resource:</label>';
+          echo '<textarea class="form-control" id="message" name="message" placeholder="Enter your message" required></textarea>';
+          echo '</div>';
+          
+          // Add other input fields or form elements as needed
+          
+          // Add a submit button
+          echo '<button type="submit" class="btn btn-primary">Assign Volunteer</button>';
+          
+          echo '</form>';
+      } else {
+          echo "No volunteers found in the event location.";
+      }
+  } else {
+      echo "Error executing query: " . $stmt->error;
+  }
+  
+  $stmt->close();
+}
+
+
 
 // Close the database connection
 $conn->close();
 ?>
+
+
+
+
 
                   </div>
                 </div>

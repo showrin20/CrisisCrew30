@@ -40,7 +40,7 @@ if (!isset($_SESSION["username"])) {
     }
 
     .sidebar {
-        background-color: #1f1c3b; /* Dark background color for the sidebar */
+        background-color:  #343a40; /* Dark background color for the sidebar */
         color: #dee2e6; /* Light text color for the sidebar */
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow for the sidebar */
     }

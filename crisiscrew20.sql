@@ -91,13 +91,13 @@ CREATE TABLE `resource` (
 );
 
 INSERT INTO `resource` (`task_id`, `name`, `description`) VALUES
-(1, 'Task 1', 'Fire extinguisher for emergencies'),
-(1, 'Task 1', 'Water hose for firefighting'),
-(1, 'Task 1', 'Fire blanket for safety'),
-(1, 'Task 1', 'First aid kit for medical emergencies'),
-(2, 'Task 2', 'Rescue Equipment for evacuations'),
-(2, 'Task 2', 'Flashlights for visibility'),
-(2, 'Task 2', 'Communication Devices for coordination');
+(1, 'Fire extinguisher', 'Fire extinguisher for emergencies'),
+(1, 'water', 'Water hose for firefighting'),
+(1, 'Fire blanket', 'Fire blanket for safety'),
+(1, 'First aid kit', 'First aid kit for medical emergencies'),
+(2, 'Rescue Equipment', 'Rescue Equipment for evacuations'),
+(2, 'Flashlights', 'Flashlights for visibility'),
+(2, 'Communication Devices', 'Communication Devices for coordination');
 -- Add more resources and tasks as needed
 
 -- phpMyAdmin SQL Dump
@@ -115,57 +115,42 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `test_db`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `images`
---
 
 CREATE TABLE `images` (
-  `id` int(11) NOT NULL,
-  `image_url` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `images`
---
-
-INSERT INTO `images` (`id`, `image_url`) VALUES
-(8, 'IMG-5f8954bd209a92.78214246.jpg'),
-(9, 'IMG-5f8954caa02539.76436861.jpg');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `images`
---
-ALTER TABLE `images`
-  ADD PRIMARY KEY (`id`);
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `image_name` VARCHAR(255) NOT NULL,
+    `image_data` LONGBLOB NOT NULL
+);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `images`
---
-ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+CREATE TABLE assignee (
+    assignee_id INT AUTO_INCREMENT PRIMARY KEY,
+    task_id INT,
+    resource_id INT,
+    id INT,
+    message TEXT,
+    FOREIGN KEY (task_id) REFERENCES task_event(task_id),
+    FOREIGN KEY (resource_id) REFERENCES resource(resource_id),
+    FOREIGN KEY (id) REFERENCES volunteers(id)
+);
+
+-- Assign volunteer with ID 1 to Task 1, Resource 1 with a message
+INSERT INTO assignee (task_id, resource_id, id, message)
+VALUES (1, 1, 1, 'Please complete this task by the end of the day.');
+
+-- Assign volunteer with ID 2 to Task 2, Resource 2 with a message
+INSERT INTO assignee (task_id, resource_id, id, message)
+VALUES (2, 2, 2, 'This is an urgent task. Please prioritize.');
+
+
+
+
+
+
 
 COMMIT;

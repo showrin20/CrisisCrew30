@@ -1,4 +1,25 @@
 <?php
+// Connection parameters
+$servername = "localhost";
+$username = "sowadrahman";
+$password = "kikhobor";
+$dbname = "crisiscrew20"; // Updated to the appropriate database
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+
+
+
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
     $name = $_POST["name"];
@@ -6,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = $_POST["message"];
 
     // Recipient's email address
-    $to = "showrinrahman66@gmail.com"; // Replace with the actual recipient's email address
+    $to = "showrinrahman66@gmail.com";
 
     // Subject of the email
     $subject = "Contact Form Submission";
