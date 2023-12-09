@@ -84,8 +84,8 @@ The project is organized into the following directories:
 
 ### Installation
 1.Clone the whole repository to your localhost folder.
-2.Launch XAMPP (or any other similar service) and start Apache, My SQL
-3.Goto phpmyadmin and create a database named crisiscrew30 and then import the file named crisiscrew30.sql
+2.Launch XAMPP (or any other similar service) and start Apache, My SQL.
+3.Goto phpmyadmin and create a database named crisiscrew30 and then import the file named crisiscrew30.sql.
 4.Then launch the site.
 
 
