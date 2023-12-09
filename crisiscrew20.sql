@@ -53,6 +53,30 @@ INSERT INTO `volunteers` (`firstName`, `lastName`, `email`, `contact`, `address`
 ('John', 'Doe', 'john@example.com', '1234567890', '123 Main St', 'Cityville', 'male', 'O+', '1990-01-01', 'First Aid, Fire Safety', 'john_doe', '1234'),
 ('Jane', 'Doe', 'jane@example.com', '9876543210', '456 Oak St', 'Townsville', 'female', 'A-', '1992-03-15', 'CPR, Disaster Management', 'volunteer', '1234');
 
+
+INSERT INTO `volunteers` (`firstName`, `lastName`, `email`, `contact`, `address`, `location`, `gender`, `bloodGroup`, `DOB`, `skills`, `username`, `password`) VALUES
+('Sarah', 'Smith', 'sarah@example.com', '9876543210', '789 Oak St', 'Townsville', 'female', 'B+', '1995-06-20', 'First Aid, CPR', 'sarah_smith', '5678'),
+('Michael', 'Johnson', 'michael@example.com', '1234567890', '456 Elm St', 'Cityville', 'male', 'AB-', '1993-09-10', 'Disaster Management, Fire Safety', 'michael_johnson', '9012'),
+('John', 'Doe', 'john@example.com', '5555555555', '123 Maple St', 'Villagetown', 'male', 'O+', '1990-03-15', 'First Aid', 'john_doe', '1234'),
+('Emily', 'Williams', 'emily@example.com', '7777777777', '789 Birch St', 'Suburbia', 'female', 'A-', '1997-12-05', 'CPR, First Responder', 'emily_williams', '5678'),
+('David', 'Brown', 'david@example.com', '3333333333', '101 Pine St', 'Hometown', 'male', 'B-', '1988-04-30', 'Fire Safety, Disaster Management', 'david_brown', '9012'),
+('Jessica', 'Anderson', 'jessica@example.com', '9999999999', '456 Cedar St', 'Metroville', 'female', 'AB+', '1992-08-25', 'First Aid, CPR', 'jessica_anderson', '5678'),
+('William', 'Jones', 'william@example.com', '1111111111', '555 Oak St', 'Villageton', 'male', 'O-', '1991-02-18', 'Disaster Management', 'william_jones', '1234'),
+('Olivia', 'Davis', 'olivia@example.com', '8888888888', '789 Redwood St', 'Smalltown', 'female', 'A+', '1998-11-07', 'First Aid, CPR', 'olivia_davis', '5678'),
+('Daniel', 'Miller', 'daniel@example.com', '4444444444', '987 Spruce St', 'Countryside', 'male', 'A-', '1996-05-12', 'CPR, First Responder', 'daniel_miller', '9012'),
+('Sophia', 'Martinez', 'sophia@example.com', '6666666666', '321 Birch St', 'Countyville', 'female', 'B+', '1994-10-02', 'Fire Safety', 'sophia_martinez', '5678');
+
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE `event` (
   `event_id` INT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(255) NOT NULL,
@@ -66,8 +90,9 @@ INSERT INTO `event` (`name`, `description`, `location`, `date`, `address`) VALUE
 ('Annual Charity Gala', 'Fundraising event for local charities', 'City Convention Center', '2023-05-20', '123 Main Street, Cityville'),
 ('Tech Conference 2023', 'Conference on the latest technology trends', 'Tech Park Auditorium', '2023-06-15', '456 Tech Avenue, Techtown'),
 ('Community Cleanup Day', 'Volunteer event to clean up the neighborhood', 'City Park', '2023-07-10', '789 Green Lane, Greenvale'),
-('Art Exhibition Opening', 'Opening of a new art exhibition', 'Art Gallery Center', '2023-08-05', '101 Art Street, Artville');
-
+('Art Exhibition Opening', 'Opening of a new art exhibition', 'Art Gallery Center', '2023-08-05', '101 Art Street, Artville'),
+('Community Festival', 'Annual community festival', 'Cityville', '2023-09-20', 'City Park, Cityville'),
+('Food Drive', 'Food collection drive for the needy', 'Cityville', '2023-10-15', 'Community Center, Cityville');
 CREATE TABLE `task_event` (
     `task_id` INT AUTO_INCREMENT PRIMARY KEY,
     `event_id` INT,
@@ -76,19 +101,20 @@ CREATE TABLE `task_event` (
     FOREIGN KEY (`event_id`) REFERENCES `event`(`event_id`)
 );
 
-INSERT INTO `task_event` (`event_id`, `task_description`, `name`) VALUES
-(1, 'Set up tables and chairs', 'Set up'),
-(1, 'Decorate the venue', 'Decorate'),
-(1, 'Serve food and drinks', 'Serve'),
-(2, 'Set up tables and chairs', 'Set up'),
-(2, 'Decorate the venue', 'Decorate'),
-(2, 'Serve food and drinks', 'Serve'),
-(3, 'Set up tables and chairs', 'Set up'),
-(3, 'Decorate the venue', 'Decorate'),
-(3, 'Serve food and drinks', 'Serve'),
-(4, 'Set up tables and chairs', 'Set up'),
-(4, 'Decorate the venue', 'Decorate'),
-(4, 'Serve food and drinks', 'Serve');
+-- Insert 10 rows of data into the task_event table with event IDs 1, 2, and 3
+INSERT INTO `task_event` (`event_id`, `task_description`, `name`)
+VALUES
+    (1, 'Set up event banners', 'Banner Setup'),
+    (1, 'Coordinate transportation', 'Transport Coordination'),
+    (1, 'Manage guest list', 'Guest List Management'),
+    (1, 'Create event schedule', 'Schedule Creation'),
+    (2, 'Set up stage equipment', 'Stage Setup'),
+    (2, 'Prepare catering services', 'Catering Preparation'),
+    (2, 'Coordinate security arrangements', 'Security Coordination'),
+    (2, 'Manage event registration', 'Registration Management'),
+    (3, 'Set up event signage', 'Signage Setup'),
+    (3, 'Coordinate audiovisual equipment', 'Audiovisual Coordination');
+
 
 CREATE TABLE `resource` (
     `resource_id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -106,33 +132,10 @@ INSERT INTO `resource` (`task_id`, `name`, `description`) VALUES
 (2, 'Rescue Equipment', 'Rescue Equipment for evacuations'),
 (2, 'Flashlights', 'Flashlights for visibility'),
 (2, 'Communication Devices', 'Communication Devices for coordination');
--- Add more resources and tasks as needed
-
--- phpMyAdmin SQL Dump
--- version 4.9.0.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Oct 16, 2020 at 10:22 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
 
 
 
-CREATE TABLE `images` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `image_name` VARCHAR(255) NOT NULL,
-    `image_data` LONGBLOB NOT NULL
-);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
 COMMIT;
 
@@ -150,6 +153,8 @@ CREATE TABLE assignee (
 -- Assign volunteer with ID 1 to Task 1, Resource 1 with a message
 INSERT INTO assignee (task_id, resource_id, id, message)
 VALUES (1, 1, 1, 'Please complete this task by the end of the day.');
+
+
 
 -- Assign volunteer with ID 2 to Task 2, Resource 2 with a message
 INSERT INTO assignee (task_id, resource_id, id, message)

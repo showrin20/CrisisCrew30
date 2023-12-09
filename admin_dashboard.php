@@ -246,7 +246,7 @@ if (!isset($_SESSION["username"])) {
 
 
 
-
+   
 
 
 </div>
@@ -362,7 +362,12 @@ $dbname = "crisiscrew20";
       ?>
       </div>
 
-
+      <h5>Delete Volunteer by Username</h5>
+    <form action="delete_volunteer.php" method="post">
+        <label for="username">Enter Username to Delete:</label>
+        <input type="text" id="username" name="username" required>
+        <button class="btn btn btn-danger"  type="submit">Delete</button>
+    </form>
     
   </div>
 </div>

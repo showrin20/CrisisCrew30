@@ -15,6 +15,28 @@
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
   </head>
+
+
+
+<style>
+  label {
+    color: white;
+}
+.btn-send {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+}
+
+</style>
+
+
+
+
+
+
+
   <body>
     <ul class="nav justify-content-end">
 
@@ -250,20 +272,62 @@
       <div class="row">
         <div class="col-md-6 col-lg-6 col-12 mt-4 mt-md-0">
           <div class="form-container">
-            <h3>Contact Us</h3>
+            <h5>Contact Us</h5>
 
-            <form action="submit_contact_form.php" method="POST">
-    <div class="form-group">
-        <input type="text" class="form-control" name="name" placeholder="Your Name" required style="margin-bottom: 15px;">
-    </div>
-    <div class="form-group">
-        <input type="email" class="form-control" name="email" placeholder="Your Email" required style="margin-bottom: 15px;">
-    </div>
-    <div class="form-group">
-        <textarea class="form-control" name="message" rows="3" placeholder="Your Message" required style="margin-bottom: 15px;"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+            <form id="contact-form" method="post" action="contact.php" role="form">
+        <div class="messages"></div>
+        <div class="controls">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="form_name">First name *</label>
+                <input id="form_name" type="text" name="name" class="form-control" placeholder="first name." required="required" data-error="First name is required.">
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="form_lastname">Last name *</label>
+                <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="last name." required="required" data-error="Last name is required.">
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="form_email">Email *</label>
+                <input id="form_email" type="email" name="email" class="form-control" placeholder="email." required="required" data-error="Valid email is required.">
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="form_phone">Phone</label>
+                <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="phone number.">
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="form_message">Message *</label>
+                <textarea is="form_message" name="message" class="form-control" placeholder="Please type your message." rows="4" required="required" data-error="Please, type your message."></textarea>
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <input type="submit" class="btn btn-success btn-sent" value="Send message">
+            </div>
+          </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text-muted"><strong>*</strong>These fields are required.</p>
+              </div>
+          </div>
+        </div>
+      </form>
 
 
 
@@ -330,6 +394,40 @@
 
    </section>
 
+
+
+   <script>
+
+$(function () {
+
+$('#contact-form').validator();
+
+$('#contact-form').on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+        var url = "contact.php";
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize(),
+            success: function (data)
+            {
+                var messageAlert = 'alert-' + data.type;
+                var messageText = data.message;
+
+                var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
+                if (messageAlert && messageText) {
+                    $('#contact-form').find('.messages').html(alertBox);
+                    $('#contact-form')[0].reset();
+                    $('body, html').animate({scrollTop:$('#contact-form').offset().top}, 'fast');
+                }
+            }
+        });
+        return false;
+    }
+})
+});
+   </script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
 
