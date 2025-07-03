@@ -1,6 +1,6 @@
 # 🌍 দুম্যগ প্রহরী (CrisisCrew) – Hult Prize 2025 Semi-Finalist
 
-![CrisisCrew Logo](assets/logo.png)
+![CrisisCrew Logo](1.png)
 
 A tech-driven social entrepreneurship solution addressing fire safety and disaster management in Bangladesh. Selected as a **Hult Prize 2025 Semi-Finalist** for its innovative approach to empowering communities and enhancing crisis response.
 
