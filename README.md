@@ -60,21 +60,9 @@ CrisisCrew operates a **freemium social enterprise model** with multiple revenue
 - **Validation**: Stakeholder consultations and gap analysis in fire safety services.
 
 📄 Reports:
-- [HULT PRIZE_ Flash Nexus](https://www.canva.com/design/DAGV_iVLi8E/3x8RcpwaQ5yL7tV2uYT6xA/view?utm_content=DAGV_iVLi8E&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hccff765576)
+- [HULT PRIZE_ Flash Nexus_PPT](https://www.canva.com/design/DAGV_iVLi8E/3x8RcpwaQ5yL7tV2uYT6xA/view?utm_content=DAGV_iVLi8E&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hccff765576)
 - [Project Report.pdf](docs/ProjectReport.pdf)
 
----
-
-## ⚙️ Prototype
-
-CrisisCrew’s MVP integrates:
-- **Technologies**: IoT sensors, GIS-based offline maps, LLM chatbot.
-- **Features**: Real-time responder dashboard, resource tracking, adaptive AI guidance, offline navigation.
-- **Hosted**: [TBD - Add hosting platform, e.g., AWS, Heroku, or GitHub Pages].
-
-🔗 [Prototype Demo](#) <!-- Replace with QR code link or live demo URL -->
-
-📁 [Prototype Files](prototype)
 
 ---
 
@@ -87,12 +75,7 @@ CrisisCrew’s MVP integrates:
 ## 🏆 Achievements
 
 - 🥈 **Hult Prize 2025 Semi-Finalist**
-- 🥈 **Hult Prize 2025 Semi-Finalist**
+- 🥈 **Selected for the University Innovation Hub Program (UIHP)**
 
 
-
-## 📸 Media Gallery
-
-![Prototype QR Code](assets/screenshots/HULT_PRIZE_Flash_Nexus_page1.png) <!-- Replace with actual screenshots or mockups -->
-![Team Photo](assets/team.jpg) <!-- Replace with actual team photo -->
 
