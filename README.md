@@ -1,4 +1,4 @@
-# 🌍 দুম্যগ প্রহরী (CrisisCrew) – Hult Prize 2025 Semi-Finalist
+# 🌍 দুম্যগ প্রহরী -- CrisisCrew
 
 ![CrisisCrew Logo](1.png)
 
