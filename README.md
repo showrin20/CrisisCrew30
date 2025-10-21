@@ -1,4 +1,4 @@
-# 🌍 দুম্যগ প্রহরী -- CrisisCrew
+# 🌍  প্রহরী -- CrisisCrew
 
 ![CrisisCrew Logo](1.png)
 
@@ -28,7 +28,7 @@ Fires in Bangladesh, particularly in urban centers like Dhaka, claim lives and c
 - **IoT & AI Integration**: Sensors and LLM-based chatbot provide real-time guidance and alerts.
 - **Social Impact**: Empowers communities, reduces response times, and enhances safety in high-risk areas like Dhaka.
 - **Innovative Element**: Offline maps, resource tracking, and adaptive AI responses for low-connectivity areas.
-
+  [CrisiscrewBot:Quick Fire Emergency Reporting](https://crisiscrew-bot.vercel.app/)
 ---
 
 ## 🎯 Target Beneficiaries
@@ -76,6 +76,7 @@ CrisisCrew operates a **freemium social enterprise model** with multiple revenue
 
 - 🥈 **Hult Prize 2025 Semi-Finalist**
 - 🥈 **Selected for the University Innovation Hub Program (UIHP)**
+
 
 
 
