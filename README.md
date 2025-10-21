@@ -1,4 +1,4 @@
-# 🌍  প্রহরী -- CrisisCrew
+# 🌍  দুর্যোগ প্রহরী -- CrisisCrew
 
 ![CrisisCrew Logo](1.png)
 
@@ -77,6 +77,7 @@ CrisisCrew operates a **freemium social enterprise model** with multiple revenue
 
 - 🥈 **Hult Prize 2025 Semi-Finalist**
 - 🥈 **Selected for the University Innovation Hub Program (UIHP)**
+
 
 
 
